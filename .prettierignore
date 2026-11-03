@@ -1,0 +1,7 @@
+build
+.react-router
+drizzle
+mct-content
+.agents
+pnpm-lock.yaml
+public

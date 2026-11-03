@@ -1,0 +1,163 @@
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
+@import "@fontsource-variable/josefin-sans/index.css";
+@import "tailwindcss";
+
+/*
+ * Design tokens — source of truth is DESIGN.md.
+ * Colour roles (60/30/10):
+ *   dominant (warm white / sand)  → backgrounds, ~60%
+ *   primary  (blue)               → structure, links, dark bands, ~30%
+ *   secondary (purple)            → supporting fills and emphasis
+ *   accent   (orange)             → calls to action ONLY (Book / Enquire)
+ * Contrast rules (WCAG AA, verified):
+ *   - Text on any *-1 soft fill must be charcoal.
+ *   - primary-dark / secondary-dark / accent-dark text is AA on dominant-1 and dominant-2.
+ *   - CTA = charcoal on accent-1 (6.1:1); hover = dominant-1 on accent-dark (6.6:1).
+ */
+@theme {
+  --color-*: initial;
+  --color-dominant-1: #f4f5ee;
+  --color-dominant-2: #f1e8dc;
+  --color-charcoal: #2b2630;
+  --color-primary-1: #8db4d6;
+  --color-primary-dark: #1f6299;
+  --color-secondary-1: #d6c6e3;
+  --color-secondary-dark: #7a45a8;
+  --color-accent-1: #ff854d;
+  --color-accent-dark: #993608;
+  /* Functional (not brand) — form errors only; 7.0:1 on dominant-1 */
+  --color-error: #9b2335;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Josefin Sans Variable", system-ui, sans-serif;
+
+  /* Type scale — DESIGN.md sizes are the desktop maximums; fluid down to mobile. */
+  --text-h0: clamp(3rem, 1.9rem + 5.2vw, 4.5rem);
+  --text-h0--line-height: 1.02;
+  --text-h1: clamp(2.5rem, 1.8rem + 3.6vw, 3.75rem);
+  --text-h1--line-height: 1.08;
+  --text-h2: clamp(2rem, 1.55rem + 2.3vw, 3rem);
+  --text-h2--line-height: 1.12;
+  --text-item: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-item--line-height: 1.2;
+  --text-lead: clamp(1.25rem, 1.05rem + 1vw, 2rem);
+  --text-lead--line-height: 1.45;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+  --text-small: 1rem;
+  --text-small--line-height: 1.6;
+  --text-eyebrow: 0.9375rem;
+  --text-eyebrow--line-height: 1.4;
+
+  --radius-blob: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  --radius-pill: 999px;
+  --radius-card: 2rem;
+
+  /* Spacing additions on top of Tailwind's 0.25rem scale */
+  --spacing-section: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --spacing-gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
+  --container-content: 76rem;
+  --container-prose: 40rem;
+
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-dominant-1 font-body text-body text-charcoal antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold text-balance;
+    /* Fraunces' soft + wonky axes give the headings their hand-made warmth */
+    font-variation-settings:
+      "SOFT" 100,
+      "WONK" 1;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    @apply text-primary-dark underline decoration-1 underline-offset-[0.2em];
+  }
+  a:hover {
+    @apply decoration-2;
+  }
+  :focus-visible {
+    @apply rounded-sm outline-3 outline-offset-3 outline-primary-dark;
+  }
+  ::selection {
+    @apply bg-secondary-1 text-charcoal;
+  }
+}
+
+@layer utilities {
+  .text-eyebrow-style {
+    @apply font-body text-eyebrow font-semibold tracking-[0.14em] uppercase;
+  }
+  .blob {
+    border-radius: var(--radius-blob);
+  }
+  .paper-grain {
+    /* Subtle natural paper texture, pure CSS (no image request) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.15 0 0 0 0 0.19 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Scroll reveal — only animates when motion is allowed and JS has run */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    translate: 0 1.5rem;
+    transition:
+      opacity 0.9s var(--ease-organic),
+      translate 0.9s var(--ease-organic);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal][data-revealed] {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .spin-slow {
+    animation: spin-slow 60s linear infinite;
+  }
+  .drift {
+    animation: drift 14s ease-in-out infinite alternate;
+  }
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes drift {
+  to {
+    translate: 0 -0.75rem;
+    rotate: 3deg;
+  }
+}
+@keyframes marquee {
+  to {
+    translate: -50% 0;
+  }
+}

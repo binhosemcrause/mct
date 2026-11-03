@@ -1,0 +1,19 @@
+.DS_Store
+.env
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# Local env
+.env*
+!.env.example
+
+# Test output
+/test-results/
+/playwright-report/
+/coverage/
+
+# Source/brand material — not needed for the build; contains third-party and personal content
+/mct-content/
