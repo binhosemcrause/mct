@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { pages } from "~/config/pages";
-import { primaryNav } from "~/config/nav";
+import { flattenNav, primaryNav } from "~/config/nav";
 import { businessJsonLd, pageMeta } from "./seo";
 
 describe("pageMeta", () => {
@@ -49,8 +49,24 @@ describe("businessJsonLd", () => {
 });
 
 describe("primaryNav", () => {
-  it("hides the Journal until there are at least 3 posts", () => {
-    expect(primaryNav({ journalPostCount: 2 }).some((i) => i.to === "/journal")).toBe(false);
-    expect(primaryNav({ journalPostCount: 3 }).some((i) => i.to === "/journal")).toBe(true);
+  it("has the agreed top-level tabs in order", () => {
+    expect(primaryNav.map((i) => i.label)).toEqual([
+      "About",
+      "Services",
+      "Referrals & NDIS",
+      "Resources",
+      "Creative Circle",
+      "Contact",
+    ]);
+  });
+
+  it("sends Community Workshops to the Therapy for All page", () => {
+    expect(flattenNav().find((l) => l.label === "Community Workshops")?.to).toBe(
+      "/about/therapy-for-all",
+    );
+  });
+
+  it("only links to pages that exist in the page registry", () => {
+    for (const { to } of flattenNav()) expect(pages[to], to).toBeDefined();
   });
 });

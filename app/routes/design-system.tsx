@@ -75,14 +75,26 @@ const swatchBg: Record<string, string> = {
 };
 
 const typeScale = [
-  { token: "text-h0", name: "Display · Fraunces 600 · 72", sample: "Every movement is a story." },
+  {
+    token: "text-h0",
+    name: "Display · Josefin Sans 600 · 72",
+    sample: "Every movement is a story.",
+  },
   {
     token: "text-h1",
-    name: "Screen title · Fraunces 600 · 60",
+    name: "Screen title · Josefin Sans 600 · 60",
     sample: "Let's find a time to talk.",
   },
-  { token: "text-h2", name: "Section · Fraunces 600 · 48", sample: "Four ways in. One circle." },
-  { token: "text-item", name: "Item title · Fraunces 600 · 36", sample: "Creative Arts Therapy" },
+  {
+    token: "text-h2",
+    name: "Section · Josefin Sans 600 · 48",
+    sample: "Four ways in. One circle.",
+  },
+  {
+    token: "text-item",
+    name: "Item title · Josefin Sans 600 · 36",
+    sample: "Creative Arts Therapy",
+  },
   {
     token: "text-lead",
     name: "Lead paragraph · Josefin Sans 400 · 32",
@@ -151,12 +163,7 @@ export default function DesignSystem() {
                   {t.name}
                 </dt>
                 <dd
-                  className={`${t.token} ${t.token.match(/h0|h1|h2|item/) ? "font-display font-semibold" : ""}`}
-                  style={
-                    t.token.match(/h0|h1|h2|item/)
-                      ? { fontVariationSettings: '"SOFT" 100, "WONK" 1' }
-                      : undefined
-                  }
+                  className={`${t.token} ${t.token.match(/h0|h1|h2|item/) ? "font-semibold" : ""}`}
                 >
                   {t.sample}
                 </dd>
@@ -176,7 +183,7 @@ export default function DesignSystem() {
             <ButtonLink to="/services" variant="primary">
               Explore services
             </ButtonLink>
-            <ButtonLink to="/fees" variant="outline" icon={<ArrowIcon />}>
+            <ButtonLink to="/contact" variant="outline" icon={<ArrowIcon />}>
               See fees and funding
             </ButtonLink>
             <Button variant="cta" size="lg">
@@ -190,7 +197,7 @@ export default function DesignSystem() {
             <ButtonLink to="/contact" variant="cta">
               CTA on deep band
             </ButtonLink>
-            <ButtonLink to="/fees" variant="inverse">
+            <ButtonLink to="/contact" variant="inverse">
               Inverse outline
             </ButtonLink>
           </div>

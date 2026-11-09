@@ -43,15 +43,15 @@
 
 | Role     | Font           | Fallback                |
 | -------- | -------------- | ----------------------- |
-| Headings | `Fraunces`     | `Georgia, serif`        |
+| Headings | `Josefin Sans` | `system-ui, sans-serif` |
 | Body     | `Josefin Sans` | `system-ui, sans-serif` |
 
 ### Type scale
 
 | Token        | Name                 | Font         | Weight         | Size |
 | ------------ | -------------------- | ------------ | -------------- | ---- |
-| `h0`         | Display Heading      | Fraunces     | Semibold (600) | 72   |
-| `h1`         | Screen Title Heading | Fraunces     | Semibold (600) | 60   |
-| `h2`         | Section Heading      | Fraunces     | Semibold (600) | 48   |
-| `item-title` | Item Title           | Fraunces     | Bold (700)     | 36   |
+| `h0`         | Display Heading      | Josefin Sans | Semibold (600) | 72   |
+| `h1`         | Screen Title Heading | Josefin Sans | Semibold (600) | 60   |
+| `h2`         | Section Heading      | Josefin Sans | Semibold (600) | 48   |
+| `item-title` | Item Title           | Josefin Sans | Bold (700)     | 36   |
 | `paragraph`  | Paragraph Text       | Josefin Sans | Regular (400)  | 32   |

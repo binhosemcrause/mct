@@ -1,6 +1,5 @@
-@import "@fontsource-variable/fraunces/full.css";
-@import "@fontsource-variable/fraunces/full-italic.css";
 @import "@fontsource-variable/josefin-sans/index.css";
+@import "@fontsource-variable/josefin-sans/wght-italic.css";
 @import "tailwindcss";
 
 /*
@@ -32,7 +31,6 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --font-display: "Fraunces Variable", Georgia, serif;
   --font-body: "Josefin Sans Variable", system-ui, sans-serif;
 
   /* Type scale — DESIGN.md sizes are the desktop maximums; fluid down to mobile. */
@@ -84,11 +82,7 @@
   h2,
   h3,
   h4 {
-    @apply font-display font-semibold text-balance;
-    /* Fraunces' soft + wonky axes give the headings their hand-made warmth */
-    font-variation-settings:
-      "SOFT" 100,
-      "WONK" 1;
+    @apply font-semibold text-balance;
   }
   p {
     text-wrap: pretty;

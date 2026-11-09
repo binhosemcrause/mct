@@ -6,7 +6,7 @@ import { Container, Section, SectionHeader } from "~/components/ui/Layout";
 import { PortraitPlaceholder } from "~/components/ui/Photo";
 import { Fact, TextWithTodos } from "~/components/ui/Todo";
 import { bookCta } from "~/config/nav";
-import { isPlaceholder, site } from "~/config/site";
+import { acknowledgementOfCountry, isPlaceholder, site } from "~/config/site";
 import {
   accessRoutes,
   firstSessionSteps,
@@ -50,7 +50,7 @@ export function IsThisForMe() {
               key={reason}
               {...reveal(i * 60)}
               className={cx(
-                "rounded-pill border border-charcoal/15 px-5 py-3 font-display text-[1.25rem] leading-tight md:px-6 md:text-[1.5rem]",
+                "rounded-pill border border-charcoal/15 px-5 py-3 text-[1.25rem] leading-tight md:px-6 md:text-[1.5rem]",
                 chipTones[i % chipTones.length],
                 chipTilt[i % chipTilt.length],
               )}
@@ -126,7 +126,7 @@ export function WhatIsCreativeArtsTherapy() {
               className="drift absolute inset-[12%] text-secondary-dark"
             />
           </div>
-          <p className="absolute -bottom-6 left-1/2 w-max -translate-x-1/2 -rotate-3 rounded-pill bg-charcoal px-6 py-3 font-display text-item text-dominant-1 italic">
+          <p className="absolute -bottom-6 left-1/2 w-max -translate-x-1/2 -rotate-3 rounded-pill bg-charcoal px-6 py-3 text-item text-dominant-1 italic">
             No artistic skill needed.
           </p>
         </div>
@@ -206,8 +206,8 @@ export function PractitionersPreview() {
             </li>
           ))}
         </ul>
-        <Link to="/practitioners" className="mt-12 inline-flex items-center gap-2 font-semibold">
-          Meet all our practitioners
+        <Link to="/about/our-story" className="mt-12 inline-flex items-center gap-2 font-semibold">
+          Read more about our team
           <ArrowIcon />
         </Link>
       </Container>
@@ -255,7 +255,7 @@ export function FirstSession() {
                 <span
                   aria-hidden="true"
                   className={cx(
-                    "blob grid size-28 place-items-center font-display text-h2 italic",
+                    "blob grid size-28 place-items-center text-h2 italic",
                     ["bg-primary-1", "bg-secondary-1", "bg-dominant-1"][i],
                   )}
                 >
@@ -308,8 +308,8 @@ export function TherapyForAll() {
             <ButtonLink to="/contact?topic=access" variant="cta">
               Ask about reduced fees
             </ButtonLink>
-            <ButtonLink to="/fees" variant="inverse">
-              See fees and funding
+            <ButtonLink to="/about/therapy-for-all" variant="inverse">
+              About Therapy for All
             </ButtonLink>
           </div>
         </div>
@@ -350,7 +350,7 @@ export function Testimonials() {
           {published.map((t) => (
             <li key={t.quote} className="rounded-card bg-dominant-2 p-8" {...reveal()}>
               <figure className="flex h-full flex-col gap-6">
-                <blockquote className="flex-1 font-display text-[1.375rem] leading-snug italic">
+                <blockquote className="flex-1 text-[1.375rem] leading-snug italic">
                   <p>“{t.quote}”</p>
                 </blockquote>
                 <figcaption className="text-small font-semibold">— {t.attribution}</figcaption>
@@ -431,6 +431,21 @@ export function FinalCta() {
             </div>
           </dl>
         </div>
+      </Container>
+    </Section>
+  );
+}
+
+/** Closes the home page; the footer omits its short version here to avoid repeating it. */
+export function Acknowledgement() {
+  return (
+    <Section aria-labelledby="acknowledgement-title">
+      <Container narrow className="text-center">
+        <Brushstroke variant="dabs" className="mx-auto mb-8 size-20 text-primary-dark/60" />
+        <h2 id="acknowledgement-title" className="text-eyebrow-style font-body text-charcoal">
+          Acknowledgement of Country
+        </h2>
+        <p className="mt-6 text-lead text-balance">{acknowledgementOfCountry}</p>
       </Container>
     </Section>
   );

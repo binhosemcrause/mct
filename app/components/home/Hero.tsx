@@ -1,63 +1,93 @@
-import { Brushstroke, Underline } from "~/components/art/Brushstroke";
+import { Link } from "react-router";
+import { Underline } from "~/components/art/Brushstroke";
 import { ArrowIcon, ButtonLink } from "~/components/ui/Button";
 import { Container } from "~/components/ui/Layout";
-import { Photo } from "~/components/ui/Photo";
 import { bookCta } from "~/config/nav";
 import { site } from "~/config/site";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="paper-grain relative overflow-hidden">
-      <Container className="grid items-center gap-12 pt-12 pb-20 md:pt-16 lg:grid-cols-12 lg:gap-8 lg:pt-20 lg:pb-28">
-        <div className="relative z-10 flex flex-col gap-8 lg:col-span-7">
-          <h1 id="hero-title" className="flex flex-col gap-5">
-            <span className="text-eyebrow-style font-body text-secondary-dark">
-              Counselling & creative arts therapy · Chelsea, VIC
-            </span>
-            <span className="text-h0 tracking-tight">
-              Every{" "}
-              <span className="relative inline-block whitespace-nowrap text-primary-dark italic">
-                movement
-                <Underline className="text-secondary-dark" />
-              </span>{" "}
-              is a story.
-            </span>
-          </h1>
-          <p className="max-w-[34rem] text-lead">{site.promise}</p>
-          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-            <ButtonLink to={bookCta.to} variant="cta" size="lg">
-              {bookCta.label}
-            </ButtonLink>
-            <ButtonLink to="#services" variant="outline" size="lg" icon={<ArrowIcon />}>
-              Explore services
-            </ButtonLink>
-          </div>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small" aria-label="At a glance">
-            {["No art skills needed", "In person or online", "Free intro chat"].map((t) => (
-              <li key={t} className="flex items-center gap-2">
-                <span aria-hidden="true" className="size-2 rounded-full bg-primary-dark" />
-                {t}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section
+      aria-labelledby="hero-title"
+      className="paper-grain relative flex min-h-[calc(100svh-5rem)] flex-col overflow-hidden bg-secondary-1"
+    >
+      {/* Oversized wordmark behind the logo: decorative, the name is already in the header */}
+      <div className="relative flex flex-1 items-center justify-center py-12">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1000 100"
+          className="absolute inset-x-0 top-1/2 hidden w-full -translate-y-1/2 px-[2vw] md:block"
+        >
+          <text
+            x="500"
+            y="92"
+            textAnchor="middle"
+            textLength="980"
+            lengthAdjust="spacing"
+            className="fill-dominant-1 font-body text-[116px] font-bold uppercase"
+          >
+            Moving Circle
+          </text>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 600 220"
+          className="absolute inset-x-0 top-1/2 w-full -translate-y-1/2 px-[3vw] md:hidden"
+        >
+          {["Moving", "Circle"].map((word, i) => (
+            <text
+              key={word}
+              x="300"
+              y={i === 0 ? 104 : 214}
+              textAnchor="middle"
+              textLength="590"
+              lengthAdjust="spacing"
+              className="fill-dominant-1 font-body text-[133px] font-bold uppercase"
+            >
+              {word}
+            </text>
+          ))}
+        </svg>
 
-        <div className="relative mx-auto w-full max-w-[34rem] lg:col-span-5">
-          <Brushstroke
-            variant="echo"
-            className="spin-slow absolute -inset-[18%] size-[136%] text-primary-1"
+        <Link
+          to="/about/our-story"
+          className="group relative z-10 block rounded-full no-underline"
+          prefetch="intent"
+        >
+          <img
+            src="/brand/logomark-solid.webp"
+            alt=""
+            width={503}
+            height={512}
+            fetchPriority="high"
+            className="relative w-[min(58vw,22rem)] drop-shadow-[0_40px_60px_rgb(31_98_153/0.35)] transition-transform duration-500 ease-organic group-hover:scale-[1.03] motion-reduce:transition-none"
           />
-          <Brushstroke
-            variant="dabs"
-            className="drift absolute -right-6 -bottom-8 size-36 text-secondary-1 md:size-44"
-          />
-          <Photo
-            name="artMaterials"
-            shape="blob"
-            priority
-            sizes="(min-width: 1024px) 34rem, 90vw"
-            className="relative aspect-[4/5] w-full shadow-[0_40px_80px_-40px_rgb(31_98_153/0.45)]"
-          />
+          <span className="sr-only">Read our story</span>
+        </Link>
+      </div>
+
+      <Container className="relative z-10 grid items-end gap-8 pb-10 lg:grid-cols-12 lg:gap-6">
+        <h1 id="hero-title" className="flex flex-col gap-3 lg:col-span-5">
+          <span className="text-eyebrow-style font-body">
+            Counselling & creative arts therapy · Chelsea, VIC
+          </span>
+          <span className="text-h2 tracking-tight">
+            Every{" "}
+            <span className="relative inline-block whitespace-nowrap text-primary-dark italic">
+              movement
+              <Underline className="text-secondary-dark" />
+            </span>{" "}
+            is a story.
+          </span>
+        </h1>
+        <p className="max-w-[30rem] lg:col-span-4">{site.promise}</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-3 lg:flex-col lg:items-stretch">
+          <ButtonLink to={bookCta.to} variant="cta" size="lg">
+            {bookCta.label}
+          </ButtonLink>
+          <ButtonLink to="#services" variant="outline" size="lg" icon={<ArrowIcon />}>
+            Explore services
+          </ButtonLink>
         </div>
       </Container>
     </section>
@@ -71,7 +101,7 @@ export function MaterialsRibbon() {
     <span className="flex shrink-0 items-center gap-8 pr-8">
       {words.map((w) => (
         <span key={w} className="flex items-center gap-8">
-          <span className="font-display text-h2 italic">{w}</span>
+          <span className="text-h2 italic">{w}</span>
           <span className="size-3 rounded-full bg-primary-1" />
         </span>
       ))}

@@ -86,7 +86,7 @@ export function PortraitPlaceholder({ name, className }: { name: string; classNa
         className,
       )}
     >
-      <span aria-hidden="true" className="font-display text-h1 text-primary-dark">
+      <span aria-hidden="true" className="text-h1 text-primary-dark">
         {initials}
       </span>
       <PlaceholderTag>{`Real portrait of ${name}`}</PlaceholderTag>

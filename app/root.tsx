@@ -5,7 +5,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteLoaderData,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -16,12 +15,7 @@ import { ButtonLink } from "~/components/ui/Button";
 import { Container } from "~/components/ui/Layout";
 import { primaryNav } from "~/config/nav";
 import { site } from "~/config/site";
-import { countPublishedPosts } from "~/db/queries.server";
 import { useScrollReveal } from "~/lib/reveal";
-
-export async function loader() {
-  return { journalPostCount: await countPublishedPosts() };
-}
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/brand/icon-32.png", type: "image/png", sizes: "32x32" },
@@ -31,8 +25,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useRouteLoaderData<typeof loader>("root");
-  const nav = primaryNav({ journalPostCount: data?.journalPostCount ?? 0 });
+  const nav = primaryNav;
   return (
     <html lang={site.language}>
       <head>

@@ -61,4 +61,4 @@ export const crisisNote = {
 } as const;
 
 export const acknowledgementOfCountry =
-  "Moving Circle Therapy acknowledges the Bunurong People, the Traditional Custodians of the lands and waters where we live and work. We pay our respects to Elders past and present, and recognise that sovereignty was never ceded.";
+  "Moving Circle Therapy acknowledges the Wurundjeri Woi-wurrung and Bunurong peoples of the eastern Kulin Nation, Traditional Custodians of the lands where we gather, move and create. For generations, First Peoples have nurtured social and emotional wellbeing through dance, song, story, art and deep connection to Country. These living practices continue today with strength, creativity and joy. We recognise that healing on these lands began long before us.";

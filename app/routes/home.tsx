@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { Hero, MaterialsRibbon } from "~/components/home/Hero";
 import {
+  Acknowledgement,
   FinalCta,
   FirstSession,
   IsThisForMe,
@@ -34,6 +35,7 @@ export default function Home() {
       <TherapyForAll />
       <Testimonials />
       <FinalCta />
+      <Acknowledgement />
     </>
   );
 }

@@ -55,7 +55,7 @@ export function ServiceCard({
         )}
       </div>
       <div className="flex flex-1 flex-col gap-3 px-3 pt-6 pb-4">
-        <span aria-hidden="true" className="font-display text-small font-semibold text-charcoal">
+        <span aria-hidden="true" className="text-small font-semibold text-charcoal">
           {number}
         </span>
         <H className="text-item">{service.name}</H>

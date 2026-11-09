@@ -32,8 +32,8 @@ test.describe("home page", () => {
     for (const name of [
       "Learn about counselling",
       "Learn about creative arts therapy",
+      "Learn about dance movement therapy",
       "Explore therapeutic workshops",
-      "See creative arts classes",
     ]) {
       const links = page.getByRole("link", { name });
       expect(await links.count()).toBeGreaterThan(0);
@@ -60,11 +60,45 @@ test.describe("home page", () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(
-      page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Fees & funding" }),
+      page
+        .getByRole("navigation", { name: "Main" })
+        .getByRole("link", { name: "Community Workshops" }),
     ).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(toggle).toBeFocused();
+  });
+
+  test("centre logo leads to Our Story", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("link", { name: "Read our story" }).click();
+    await expect(page).toHaveURL(/\/about\/our-story$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Our Story");
+  });
+
+  test("desktop dropdowns open, nest workshops and close with Escape", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, "dropdowns only show on wide screens");
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Main" });
+    const services = nav.getByRole("button", { name: "Services" });
+    await services.click();
+    await expect(services).toHaveAttribute("aria-expanded", "true");
+    await expect(nav.getByRole("link", { name: "Corporate Wellbeing Workshops" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(services).toHaveAttribute("aria-expanded", "false");
+    await expect(services).toBeFocused();
+    await nav.getByRole("button", { name: "About" }).click();
+    await nav.getByRole("link", { name: "Therapy for All" }).click();
+    await expect(page).toHaveURL(/\/about\/therapy-for-all$/);
+  });
+
+  test("ends with the Acknowledgement of Country", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "Acknowledgement of Country" })).toBeVisible();
+    await expect(page.getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/)).toHaveCount(1);
   });
 
   test("serves sitemap.xml and robots.txt", async ({ request }) => {

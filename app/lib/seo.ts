@@ -94,8 +94,8 @@ export function businessJsonLd() {
     availableService: [
       { "@type": "MedicalTherapy", name: "Counselling" },
       { "@type": "MedicalTherapy", name: "Creative arts therapy" },
+      { "@type": "MedicalTherapy", name: "Dance movement therapy" },
       { "@type": "Service", name: "Therapeutic workshops" },
-      { "@type": "Service", name: "Creative arts classes" },
     ],
   };
 }

@@ -1,7 +1,8 @@
 import type { PhotoKey } from "./photos";
 import type { BrushVariant } from "~/components/art/Brushstroke";
 
-export type ServiceSlug = "counselling" | "creative-arts-therapy" | "workshops" | "classes";
+export type ServiceSlug =
+  "counselling" | "creative-arts-therapy" | "dance-movement-therapy" | "workshops";
 
 export interface Service {
   slug: ServiceSlug;
@@ -34,21 +35,21 @@ export const services: readonly Service[] = [
     tone: "secondary",
   },
   {
+    slug: "dance-movement-therapy",
+    name: "Dance Movement Therapy",
+    benefit:
+      "Let your body lead: gentle, guided movement to notice, express and ease what you're carrying.",
+    linkLabel: "Learn about dance movement therapy",
+    visual: { art: "scribble" },
+    tone: "sand",
+  },
+  {
     slug: "workshops",
     name: "Therapeutic Workshops",
     benefit:
       "Small-group sessions and workplace wellbeing programs built around creativity and connection.",
     linkLabel: "Explore therapeutic workshops",
     visual: { art: "swirl" },
-    tone: "sand",
-  },
-  {
-    slug: "classes",
-    name: "Creative Arts Classes",
-    benefit:
-      "Relaxed painting, drawing and dance classes for all ages — just for the joy of making.",
-    linkLabel: "See creative arts classes",
-    visual: { art: "scribble" },
     tone: "primary",
   },
 ];
@@ -56,8 +57,8 @@ export const services: readonly Service[] = [
 export const serviceOptions = [
   { value: "counselling", label: "Counselling" },
   { value: "creative-arts-therapy", label: "Creative arts therapy" },
-  { value: "workshops", label: "Therapeutic workshops" },
-  { value: "classes", label: "Creative arts classes" },
-  { value: "workplace", label: "Workplace wellbeing program" },
+  { value: "dance-movement-therapy", label: "Dance movement therapy" },
+  { value: "workshops", label: "Community workshops" },
+  { value: "workplace", label: "Corporate wellbeing workshops" },
   { value: "unsure", label: "I'm not sure yet" },
 ] as const;

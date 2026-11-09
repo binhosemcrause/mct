@@ -1,21 +1,61 @@
+/**
+ * A nav entry is a link, a group (dropdown) of entries, or both: a link with
+ * its own sub-links (e.g. Therapeutic Workshops).
+ */
 export interface NavItem {
   label: string;
-  to: string;
+  to?: string;
+  children?: NavItem[];
 }
 
-/** Journal stays out of the nav until there are enough posts to be worth visiting. */
-export const JOURNAL_MIN_POSTS = 3;
+export const primaryNav: NavItem[] = [
+  {
+    label: "About",
+    children: [
+      { label: "Our Story", to: "/about/our-story" },
+      { label: "Therapy for All", to: "/about/therapy-for-all" },
+    ],
+  },
+  {
+    label: "Services",
+    children: [
+      { label: "Counselling", to: "/services/counselling" },
+      { label: "Creative Arts Therapy", to: "/services/creative-arts-therapy" },
+      { label: "Dance Movement Therapy", to: "/services/dance-movement-therapy" },
+      {
+        label: "Therapeutic Workshops",
+        to: "/services/workshops",
+        children: [
+          { label: "Corporate Wellbeing Workshops", to: "/services/workshops/corporate-wellbeing" },
+          // Community workshops are run under the Therapy for All program
+          { label: "Community Workshops", to: "/about/therapy-for-all" },
+        ],
+      },
+    ],
+  },
+  { label: "Referrals & NDIS", to: "/referrals-ndis" },
+  {
+    label: "Resources",
+    children: [
+      { label: "Blog", to: "/resources/blog" },
+      { label: "Frameworks", to: "/resources/frameworks" },
+    ],
+  },
+  { label: "Creative Circle", to: "/creative-circle" },
+  { label: "Contact", to: "/contact" },
+];
 
-export function primaryNav({ journalPostCount }: { journalPostCount: number }): NavItem[] {
-  return [
-    { label: "Services", to: "/services" },
-    { label: "Practitioners", to: "/practitioners" },
-    { label: "Fees & funding", to: "/fees" },
-    { label: "What's on", to: "/whats-on" },
-    { label: "About", to: "/about" },
-    ...(journalPostCount >= JOURNAL_MIN_POSTS ? [{ label: "Journal", to: "/journal" }] : []),
-    { label: "Contact", to: "/contact" },
-  ];
+/** Every link in the nav, depth-first (for the footer and tests). */
+export function flattenNav(items: NavItem[] = primaryNav): { label: string; to: string }[] {
+  return items.flatMap((item) => [
+    ...(item.to ? [{ label: item.label, to: item.to }] : []),
+    ...flattenNav(item.children ?? []),
+  ]);
+}
+
+/** True when the current path is the item or one of its descendants. */
+export function isActiveItem(item: NavItem, pathname: string): boolean {
+  return item.to === pathname || (item.children ?? []).some((c) => isActiveItem(c, pathname));
 }
 
 export const bookCta = { label: "Book a free 15-min chat", to: "/contact#book" } as const;

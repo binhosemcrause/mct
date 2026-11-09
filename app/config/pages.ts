@@ -21,9 +21,9 @@ export const pages: Record<string, PageInfo> = {
   "/services": {
     title: "Services",
     description:
-      "Counselling, creative arts therapy, therapeutic workshops and creative arts classes in Chelsea, VIC — individual, couples, adolescent, group and online options.",
+      "Counselling, creative arts therapy, dance movement therapy and therapeutic workshops in Chelsea, VIC — individual, group and online options.",
     intro:
-      "Counselling, creative arts therapy, workshops and classes — in person in Chelsea or online.",
+      "Counselling, creative arts therapy, dance movement therapy and workshops — in person in Chelsea or online.",
     inSitemap: true,
   },
   "/services/counselling": {
@@ -47,47 +47,61 @@ export const pages: Record<string, PageInfo> = {
     intro: "Small-group sessions and workplace wellbeing programs.",
     inSitemap: true,
   },
-  "/services/classes": {
-    title: "Creative Arts Classes in Chelsea",
+  "/about/our-story": {
+    title: "Our Story",
     description:
-      "Relaxed painting, drawing and dance classes for children, teens and adults in Chelsea, VIC. All ages, all abilities, no experience needed.",
-    intro: "Relaxed painting, drawing and dance classes for all ages.",
+      "How Moving Circle Therapy began, the values behind our work and the practitioners you'll meet in our Chelsea studio.",
+    intro: "How Moving Circle began, what we value and who you'll meet.",
     inSitemap: true,
   },
-  "/practitioners": {
-    title: "Our Practitioners",
+  "/about/therapy-for-all": {
+    title: "Therapy for All & Community Workshops",
     description:
-      "Meet the counsellors and creative arts therapists at Moving Circle Therapy in Chelsea, VIC — their qualifications, registrations, approach and languages.",
-    intro: "The people you'll meet, their training and how they work.",
+      "Therapy for All is our community program: reduced-fee places and community workshops so cost doesn't decide who gets support.",
+    intro: "Our community program: reduced-fee places and community workshops.",
     inSitemap: true,
   },
-  "/fees": {
-    title: "Fees & Funding",
+  "/services/dance-movement-therapy": {
+    title: "Dance Movement Therapy in Chelsea",
     description:
-      "Session fees, sliding-scale and concession rates, NDIS, private health and EAP information, and our cancellation policy at Moving Circle Therapy.",
-    intro: "Clear prices, concession rates and funding options.",
+      "Dance movement therapy in Chelsea, VIC: using movement and the body to explore feelings, build connection and find steadier ground. No dance experience needed.",
+    intro: "Use movement and the body to explore what words can't reach.",
     inSitemap: true,
   },
-  "/whats-on": {
-    title: "Workshops & Classes — What's On",
+  "/services/workshops/corporate-wellbeing": {
+    title: "Corporate Wellbeing Workshops",
     description:
-      "Upcoming creative workshops and classes in Chelsea, VIC. See dates, prices and places available, and reserve your spot.",
-    intro: "Upcoming workshops and classes — reserve a spot.",
+      "Creative, movement-based wellbeing workshops for workplaces across Melbourne's south-east, Bayside and the Mornington Peninsula.",
+    intro: "Creative wellbeing workshops for your team or workplace.",
     inSitemap: true,
   },
-  "/about": {
-    title: "About Moving Circle",
+  "/referrals-ndis": {
+    title: "Referrals & NDIS",
     description:
-      "The story behind Moving Circle Therapy, our values, our Therapy for All community mission, and our Acknowledgement of Country.",
-    intro: "Our story, our values and our community mission.",
+      "How to refer someone to Moving Circle Therapy, and how creative arts therapy and counselling can work with NDIS funding.",
+    intro: "How referrals work, and how we work with NDIS participants.",
     inSitemap: true,
   },
-  "/journal": {
-    title: "Journal",
+  "/resources/blog": {
+    title: "Blog",
     description:
       "Gentle, practical writing on wellbeing, creativity and movement from the practitioners at Moving Circle Therapy.",
     intro: "Writing on wellbeing, creativity and movement.",
-    inSitemap: false,
+    inSitemap: true,
+  },
+  "/resources/frameworks": {
+    title: "Frameworks",
+    description:
+      "The therapeutic frameworks and approaches that guide how we work at Moving Circle Therapy.",
+    intro: "The frameworks and approaches that guide our work.",
+    inSitemap: true,
+  },
+  "/creative-circle": {
+    title: "Creative Circle",
+    description:
+      "Creative Circle at Moving Circle Therapy, Chelsea VIC: a space to gather, make and move together.",
+    intro: "A space to gather, make and move together.",
+    inSitemap: true,
   },
   "/contact": {
     title: "Contact & Book",

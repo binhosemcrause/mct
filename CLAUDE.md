@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **React Router 8 framework mode.** Routes are declared explicitly in `app/routes.ts`. `ssr: true` plus a `prerender` list in `react-router.config.ts`: content pages are static HTML; the server only handles actions (the `/contact` enquiry form). When adding a route, add it to `prerender` and, once it has real content, to `LIVE_PATHS` in `app/routes/sitemap.ts`.
 - **Unbuilt pages** all map to `routes/page-stub.tsx` (one route id per path, `noindex`) so the nav never dead-ends. Replace a stub by pointing its path at a new module.
-- **Single sources of truth:** practice facts in `app/config/site.ts`; per-page title/description in `app/config/pages.ts` (unit test enforces uniqueness and length); nav in `app/config/nav.ts` (Journal hidden until ≥3 published posts, counted in the root loader); copy/data in `app/content/*`.
+- **Single sources of truth:** practice facts in `app/config/site.ts`; per-page title/description in `app/config/pages.ts` (unit test enforces uniqueness and length); nav in `app/config/nav.ts` (nested items render as disclosure dropdowns on desktop and open groups on mobile; a unit test checks every nav link has a `pages` entry); copy/data in `app/content/*`.
 - **Placeholders:** unconfirmed values start with `TODO`. Render them via `<Fact>` / `<TextWithTodos>` / `<Todo>` (`components/ui/Todo.tsx`) so they show as dashed placeholders. Never invent practice facts (fees, registrations, hours, credentials). `businessJsonLd()` omits placeholder values.
 - **Enquiry flow:** `lib/enquiry-schema.ts` (zod) is shared by the client (blur validation and error summary in `components/forms/EnquiryForm.tsx`) and the server action in `routes/contact.tsx`, so the form works without JS. Data goes to `db/queries.server.ts` (Drizzle over Neon HTTP; `db` is `null` when `DATABASE_URL` is unset), then `lib/notify.server.ts` sends an optional Resend email. Never log or email the free-text message; it may contain health information.
 - `*.server.ts` modules must only be imported from loaders and actions.
@@ -22,7 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Design rules (from DESIGN.md — tokens in `app/app.css` `@theme`)
 
 - Default Tailwind colours are disabled. Use only the brand tokens. Accent orange (`accent-1`/`accent-dark`) is **only** for CTA buttons (`variant="cta"`). Text on any `*-1` soft fill must be `charcoal`. `error` is a functional colour for forms only.
-- Headings: Fraunces with `"SOFT" 100, "WONK" 1` (set globally). Body: Josefin Sans, 18px / 1.6. Use the type tokens `text-h0…text-item`, `text-lead`, `text-body`, `text-small`.
+- Type: Josefin Sans everywhere (headings semibold, set globally; body 18px / 1.6). No second typeface. Use the type tokens `text-h0…text-item`, `text-lead`, `text-body`, `text-small`.
 - Build pages from `components/ui` (Button, Section, SectionHeader, Container, Card, Field, Photo) and `components/art/Brushstroke`. `/design-system` shows them all.
 - No stock photos of people. Use `<Brushstroke>` art until real photos (with consent) arrive. Placeholder photos are registered in `content/photos.ts` with a visible "replace with" label.
 - Scroll motion: spread `reveal()` onto elements. CSS disables all motion under `prefers-reduced-motion`. Don't put Tailwind `translate-*` on an element that also has `data-reveal` (they share the `translate` property).

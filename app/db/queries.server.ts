@@ -1,7 +1,6 @@
-import { count, isNotNull } from "drizzle-orm";
 import type { EnquiryInput } from "~/lib/enquiry-schema";
 import { db } from "./client.server";
-import { enquiries, posts } from "./schema";
+import { enquiries } from "./schema";
 
 export class DatabaseUnavailableError extends Error {
   constructor() {
@@ -27,16 +26,4 @@ export async function createEnquiry(input: EnquiryInput) {
     })
     .returning({ id: enquiries.id });
   return row;
-}
-
-/** Used to decide whether the Journal appears in navigation. Never throws. */
-export async function countPublishedPosts(): Promise<number> {
-  if (!db) return 0;
-  try {
-    const [row] = await db.select({ n: count() }).from(posts).where(isNotNull(posts.publishedAt));
-    return row?.n ?? 0;
-  } catch (error) {
-    console.error("countPublishedPosts failed", error);
-    return 0;
-  }
 }
