@@ -14,35 +14,16 @@ test.describe("home page", () => {
     expect(ld.address.addressLocality).toBe("Chelsea");
   });
 
-  test("hero offers booking and services, and the crisis note is visible", async ({ page }) => {
+  test("splash shows the logo, menu and Acknowledgement of Country", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Every movement is a story.",
     );
-    await expect(page.getByRole("link", { name: "Book a free 15-min chat" }).first()).toBeVisible();
-    await page.getByRole("link", { name: "Explore services" }).click();
-    await expect(page.getByRole("heading", { name: "Four ways in. One circle." })).toBeInViewport();
+    await expect(page.getByRole("link", { name: "Read our story" })).toBeVisible();
+    await expect(page.getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/)).toBeVisible();
     await expect(
       page.getByRole("contentinfo").getByText("This service isn't for emergencies."),
-    ).toBeVisible();
-  });
-
-  test("service cards use descriptive link text", async ({ page }) => {
-    await page.goto("/");
-    for (const name of [
-      "Learn about counselling",
-      "Learn about creative arts therapy",
-      "Learn about dance movement therapy",
-      "Explore therapeutic workshops",
-    ]) {
-      const links = page.getByRole("link", { name });
-      expect(await links.count()).toBeGreaterThan(0);
-      for (const link of await links.all())
-        await expect(link).toHaveAttribute("href", /\/services\//);
-    }
-    await expect(
-      page.getByRole("link", { name: /^(more info|learn more|click here)$/i }),
-    ).toHaveCount(0);
+    ).toBeAttached();
   });
 
   test("keyboard users can skip to content", async ({ page }) => {
@@ -93,12 +74,6 @@ test.describe("home page", () => {
     await nav.getByRole("button", { name: "About" }).click();
     await nav.getByRole("link", { name: "Therapy for All" }).click();
     await expect(page).toHaveURL(/\/about\/therapy-for-all$/);
-  });
-
-  test("ends with the Acknowledgement of Country", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Acknowledgement of Country" })).toBeVisible();
-    await expect(page.getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/)).toHaveCount(1);
   });
 
   test("serves sitemap.xml and robots.txt", async ({ request }) => {

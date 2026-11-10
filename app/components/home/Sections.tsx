@@ -6,7 +6,7 @@ import { Container, Section, SectionHeader } from "~/components/ui/Layout";
 import { PortraitPlaceholder } from "~/components/ui/Photo";
 import { Fact, TextWithTodos } from "~/components/ui/Todo";
 import { bookCta } from "~/config/nav";
-import { acknowledgementOfCountry, isPlaceholder, site } from "~/config/site";
+import { isPlaceholder, site } from "~/config/site";
 import {
   accessRoutes,
   firstSessionSteps,
@@ -431,21 +431,6 @@ export function FinalCta() {
             </div>
           </dl>
         </div>
-      </Container>
-    </Section>
-  );
-}
-
-/** Closes the home page; the footer omits its short version here to avoid repeating it. */
-export function Acknowledgement() {
-  return (
-    <Section aria-labelledby="acknowledgement-title">
-      <Container narrow className="text-center">
-        <Brushstroke variant="dabs" className="mx-auto mb-8 size-20 text-primary-dark/60" />
-        <h2 id="acknowledgement-title" className="text-eyebrow-style font-body text-charcoal">
-          Acknowledgement of Country
-        </h2>
-        <p className="mt-6 text-lead text-balance">{acknowledgementOfCountry}</p>
       </Container>
     </Section>
   );

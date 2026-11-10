@@ -1,16 +1,5 @@
 import type { Route } from "./+types/home";
-import { Hero, MaterialsRibbon } from "~/components/home/Hero";
-import {
-  Acknowledgement,
-  FinalCta,
-  FirstSession,
-  IsThisForMe,
-  PractitionersPreview,
-  ServicesOverview,
-  Testimonials,
-  TherapyForAll,
-  WhatIsCreativeArtsTherapy,
-} from "~/components/home/Sections";
+import { Hero } from "~/components/home/Hero";
 import { pages } from "~/config/pages";
 import { businessJsonLd, jsonLdScript, pageMeta } from "~/lib/seo";
 
@@ -23,19 +12,5 @@ export function meta(_: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <MaterialsRibbon />
-      <IsThisForMe />
-      <ServicesOverview />
-      <WhatIsCreativeArtsTherapy />
-      <PractitionersPreview />
-      <FirstSession />
-      <TherapyForAll />
-      <Testimonials />
-      <FinalCta />
-      <Acknowledgement />
-    </>
-  );
+  return <Hero />;
 }

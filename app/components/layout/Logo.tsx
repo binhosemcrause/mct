@@ -2,8 +2,8 @@ import { Link } from "react-router";
 import { cx } from "~/lib/cx";
 
 /**
- * Wordmark linking home. The header uses the text alone (top-left); the mark is
- * optional because the home hero shows it large in the centre.
+ * Wordmark linking home: "moving circle" with "THERAPY" centred beneath.
+ * The mark is optional because the home splash shows it large in the centre.
  */
 export function Logo({
   className,
@@ -17,7 +17,7 @@ export function Logo({
   return (
     <Link
       to="/"
-      className={cx("inline-flex items-center gap-3 text-charcoal no-underline", className)}
+      className={cx("inline-flex items-center gap-3 text-inherit no-underline", className)}
     >
       {mark && (
         <img
@@ -28,13 +28,23 @@ export function Logo({
           className={size === "lg" ? "h-20 w-auto" : "h-12 w-auto"}
         />
       )}
-      <span
-        className={cx(
-          "font-semibold tracking-tight",
-          size === "lg" ? "text-item leading-tight" : "text-[1.25rem] whitespace-nowrap",
-        )}
-      >
-        Moving Circle Therapy
+      <span className="flex flex-col items-center leading-none whitespace-nowrap">
+        <span
+          className={cx(
+            "font-bold tracking-tight lowercase",
+            size === "lg" ? "text-[2.25rem]" : "text-[1.625rem] md:text-[2rem]",
+          )}
+        >
+          moving circle
+        </span>
+        <span
+          className={cx(
+            "mt-1 tracking-[0.08em] uppercase",
+            size === "lg" ? "text-[1.25rem]" : "text-[0.9375rem] md:text-[1.0625rem]",
+          )}
+        >
+          Therapy
+        </span>
       </span>
       <span className="sr-only"> — home</span>
     </Link>

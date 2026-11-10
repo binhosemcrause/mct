@@ -108,6 +108,24 @@
   .blob {
     border-radius: var(--radius-blob);
   }
+  /* Home splash: warm orange/amber glow in the centre, melting into soft blue */
+  .aura {
+    background-color: #a9c6e4;
+    /* vmin sizes keep the glow round on both phones and wide screens */
+    background-image:
+      radial-gradient(ellipse 44vmin 32vmin at 43% 86%, rgb(244 190 72 / 0.95), transparent 75%),
+      radial-gradient(ellipse 60vmin 58vmin at 52% 24%, rgb(240 124 82 / 0.95), transparent 72%),
+      radial-gradient(ellipse 64vmin 78vmin at 50% 55%, rgb(238 148 92 / 0.9), transparent 72%),
+      radial-gradient(ellipse 112vmin 125vmin at 48% 50%, rgb(208 156 176 / 0.85), transparent 75%);
+  }
+  /* White text on the aura: a tight blue halo keeps it at AA contrast over the light
+     areas (WCAG measures haloed text against the halo) without a visible box. */
+  .text-halo {
+    text-shadow:
+      0 0 1px rgb(31 98 153 / 0.9),
+      0 0 3px rgb(31 98 153 / 0.55),
+      0 1px 8px rgb(31 98 153 / 0.25);
+  }
   .paper-grain {
     /* Subtle natural paper texture, pure CSS (no image request) */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.15 0 0 0 0 0.19 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -128,6 +146,10 @@
     opacity: 1;
     translate: 0 0;
   }
+  /* Slow "breath" for the home logo */
+  .breathe {
+    animation: breathe 9s var(--ease-organic) infinite alternate;
+  }
   .spin-slow {
     animation: spin-slow 60s linear infinite;
   }
@@ -139,6 +161,11 @@
   }
 }
 
+@keyframes breathe {
+  to {
+    scale: 1.035;
+  }
+}
 @keyframes spin-slow {
   to {
     rotate: 360deg;

@@ -6,10 +6,14 @@ import { bookCta, isActiveItem, type NavItem } from "~/config/nav";
 import { cx } from "~/lib/cx";
 import { Logo } from "./Logo";
 
-const topItem = (active: boolean) =>
+const topItem = (active: boolean, overlay: boolean) =>
   cx(
-    "relative inline-flex items-center gap-1.5 rounded-pill px-3 py-2 font-semibold whitespace-nowrap text-charcoal no-underline transition-colors hover:bg-dominant-2",
-    active && "bg-primary-1/50",
+    "relative inline-flex items-center gap-1.5 rounded-pill px-3 py-2 whitespace-nowrap no-underline transition-colors",
+    overlay
+      ? // Home splash: white, lowercase, airy — over the aura gradient
+        "text-halo text-[1.375rem] tracking-wide text-white lowercase hover:bg-white/15"
+      : "font-semibold text-charcoal hover:bg-dominant-2",
+    active && (overlay ? "bg-white/15" : "bg-primary-1/50"),
   );
 
 const menuLink = ({ isActive }: { isActive: boolean }) =>
@@ -57,8 +61,10 @@ function Dropdown({
   open,
   onToggle,
   onClose,
+  overlay,
 }: {
   item: NavItem;
+  overlay: boolean;
   open: boolean;
   onToggle: () => void;
   onClose: () => void;
@@ -77,7 +83,7 @@ function Dropdown({
     >
       <button
         type="button"
-        className={topItem(isActiveItem(item, pathname))}
+        className={topItem(isActiveItem(item, pathname), overlay)}
         aria-expanded={open}
         aria-controls={panelId}
         onClick={onToggle}
@@ -103,6 +109,8 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
+  // The home page header floats transparently over the splash
+  const overlay = pathname === "/";
 
   // Close menus on navigation (state adjusted during render, not in an effect)
   const [lastPath, setLastPath] = useState(pathname);
@@ -141,12 +149,24 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
   }, [open, openGroup]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-charcoal/10 bg-dominant-1/90 backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-dominant-1">
-      <Container className="flex min-h-20 items-center justify-between gap-6">
-        <Logo />
+    <header
+      className={cx(
+        "z-40",
+        overlay
+          ? "absolute inset-x-0 top-0 text-white"
+          : "sticky top-0 border-b border-charcoal/10 bg-dominant-1/90 text-charcoal backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-dominant-1",
+      )}
+    >
+      <Container
+        className={cx(
+          "flex items-center justify-between gap-6",
+          overlay ? "min-h-28 max-w-none md:px-8" : "min-h-20",
+        )}
+      >
+        <Logo className={cx(overlay && "text-halo")} />
 
         <nav ref={navRef} aria-label="Main" className="hidden xl:block">
-          <ul className="flex items-center gap-0.5">
+          <ul className={cx("flex items-center", overlay ? "gap-4 2xl:gap-8" : "gap-0.5")}>
             {nav.map((item) =>
               item.children ? (
                 <Dropdown
@@ -155,12 +175,13 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
                   open={openGroup === item.label}
                   onToggle={() => setOpenGroup((g) => (g === item.label ? null : item.label))}
                   onClose={() => setOpenGroup((g) => (g === item.label ? null : g))}
+                  overlay={overlay}
                 />
               ) : (
                 <li key={item.label}>
                   <NavLink
                     to={item.to!}
-                    className={({ isActive }) => topItem(isActive)}
+                    className={({ isActive }) => topItem(isActive, overlay)}
                     prefetch="intent"
                   >
                     {item.label}
@@ -171,8 +192,8 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:block">
+        <div className={cx("flex items-center gap-3", overlay && "xl:hidden")}>
+          <div className={cx("hidden", !overlay && "sm:block")}>
             <ButtonLink to={bookCta.to} variant="cta" className="whitespace-nowrap">
               {bookCta.label}
             </ButtonLink>
@@ -180,7 +201,10 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
           <button
             ref={buttonRef}
             type="button"
-            className="inline-flex min-h-12 items-center gap-2 rounded-pill border-2 border-charcoal px-4 font-semibold xl:hidden"
+            className={cx(
+              "inline-flex min-h-12 items-center gap-2 rounded-pill border-2 px-4 font-semibold xl:hidden",
+              overlay ? "text-halo border-white bg-white/10" : "border-charcoal",
+            )}
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((o) => !o)}
@@ -225,8 +249,9 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
                     to={item.to!}
                     className={({ isActive }) =>
                       cx(
-                        "block rounded-2xl px-4 py-2 text-item text-charcoal no-underline hover:bg-dominant-2",
-                        isActive && "bg-primary-1/50",
+                        // Same purple label style as the group headings above
+                        "text-eyebrow-style block rounded-2xl px-4 py-2 text-secondary-dark no-underline hover:bg-dominant-2",
+                        isActive && "bg-primary-1/50 text-charcoal",
                       )
                     }
                   >
@@ -236,7 +261,7 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
               ),
             )}
           </ul>
-          <div className="mt-6 sm:hidden">
+          <div className={cx("mt-6", !overlay && "sm:hidden")}>
             <ButtonLink to={bookCta.to} variant="cta" size="lg" className="w-full">
               {bookCta.label}
             </ButtonLink>
