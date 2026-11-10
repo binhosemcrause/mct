@@ -41,6 +41,10 @@
   --color-accent-dark: #993608;
   /* Functional (not brand) — form errors only; 7.0:1 on dominant-1 */
   --color-error: #9b2335;
+  /* Inner-page menu text: AA-safe burnt orange (4.9:1 on paper) */
+  --color-ember: #b94c18;
+  /* Services page counselling shape */
+  --color-sun: #fadc6e;
   /* Footer */
   --color-paper: #fefaf5;
   --color-ink: #163b5f;
@@ -135,6 +139,13 @@
       radial-gradient(ellipse 60vmin 58vmin at 52% 24%, rgb(240 124 82 / 0.95), transparent 72%),
       radial-gradient(ellipse 64vmin 78vmin at 50% 55%, rgb(238 148 92 / 0.9), transparent 72%),
       radial-gradient(ellipse 112vmin 125vmin at 48% 50%, rgb(208 156 176 / 0.85), transparent 75%);
+  }
+  /* Inner pages: pale blue-grey with a soft peach/amber glow */
+  .aura-soft {
+    background-color: #e5eaf0;
+    background-image:
+      radial-gradient(ellipse 34vmin 28vmin at 42% 92%, rgb(250 214 140 / 0.75), transparent 75%),
+      radial-gradient(ellipse 50vmin 60vmin at 45% 45%, rgb(246 196 168 / 0.7), transparent 72%);
   }
   /* White text on the aura: a tight blue halo keeps it at AA contrast over the light
      areas (WCAG measures haloed text against the halo) without a visible box. */

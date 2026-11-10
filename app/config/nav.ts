@@ -18,6 +18,7 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Services",
+    to: "/services",
     children: [
       { label: "Counselling", to: "/services/counselling" },
       { label: "Creative Arts Therapy", to: "/services/creative-arts-therapy" },

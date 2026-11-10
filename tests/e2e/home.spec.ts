@@ -66,7 +66,7 @@ test.describe("home page", () => {
     test.skip(isMobile, "dropdowns only show on wide screens");
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Main" });
-    const services = nav.getByRole("button", { name: "Services" });
+    const services = nav.getByRole("button", { name: "Services menu" });
     await services.click();
     await expect(services).toHaveAttribute("aria-expanded", "true");
     await expect(nav.getByRole("link", { name: "Corporate Wellbeing Workshops" })).toBeVisible();
@@ -76,6 +76,23 @@ test.describe("home page", () => {
     await nav.getByRole("button", { name: "About" }).click();
     await nav.getByRole("link", { name: "Therapy for All" }).click();
     await expect(page).toHaveURL(/\/about\/therapy-for-all$/);
+  });
+
+  test("the Services menu item opens the services page", async ({ page, isMobile }) => {
+    test.skip(isMobile, "top-level links only show on wide screens");
+    await page.goto("/");
+    await page
+      .getByRole("navigation", { name: "Main" })
+      .getByRole("link", { name: "Services", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/services$/);
+    for (const name of [
+      "Counselling",
+      "Creative Arts Therapy",
+      "Dance Movement Therapy",
+      "Therapeutic Workshops",
+    ])
+      await expect(page.getByRole("main").getByRole("link", { name })).toBeVisible();
   });
 
   test("serves sitemap.xml and robots.txt", async ({ request }) => {

@@ -9,16 +9,18 @@ import { Logo } from "./Logo";
 const topItem = (active: boolean, overlay: boolean) =>
   cx(
     "relative inline-flex items-center gap-1.5 rounded-pill px-3 py-2 whitespace-nowrap no-underline transition-colors",
+    "text-[1.375rem] tracking-wide lowercase",
     overlay
-      ? // Home splash: white, lowercase, airy — over the aura gradient
-        "text-halo text-[1.375rem] tracking-wide text-white lowercase hover:bg-white/15"
-      : "font-semibold text-charcoal hover:bg-dominant-2",
-    active && (overlay ? "bg-white/15" : "bg-primary-1/50"),
+      ? // Home splash: white over the aura gradient
+        "text-halo text-white hover:bg-white/15"
+      : // Every other page: brand orange on the cream bar
+        "text-ember hover:bg-dominant-2",
+    active && "font-bold",
   );
 
 const menuLink = ({ isActive }: { isActive: boolean }) =>
   cx(
-    "block rounded-2xl px-4 py-2.5 text-charcoal no-underline hover:bg-dominant-2 xl:whitespace-nowrap",
+    "block rounded-2xl px-4 py-2.5 text-ink no-underline hover:bg-dominant-2 xl:whitespace-nowrap",
     isActive && "bg-primary-1/50",
   );
 
@@ -81,16 +83,40 @@ function Dropdown({
         if (!ref.current?.contains(e.relatedTarget as Node | null)) onClose();
       }}
     >
-      <button
-        type="button"
-        className={topItem(isActiveItem(item, pathname), overlay)}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={onToggle}
-      >
-        {item.label}
-        <Chevron open={open} />
-      </button>
+      {item.to ? (
+        // Group with its own page (Services): the label navigates, the chevron opens the list
+        <span className="inline-flex items-center">
+          <NavLink
+            to={item.to}
+            end
+            className={() => cx(topItem(isActiveItem(item, pathname), overlay), "pr-1")}
+            prefetch="intent"
+          >
+            {item.label}
+          </NavLink>
+          <button
+            type="button"
+            className={cx(topItem(false, overlay), "px-2")}
+            aria-expanded={open}
+            aria-controls={panelId}
+            aria-label={`${item.label} menu`}
+            onClick={onToggle}
+          >
+            <Chevron open={open} />
+          </button>
+        </span>
+      ) : (
+        <button
+          type="button"
+          className={topItem(isActiveItem(item, pathname), overlay)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={onToggle}
+        >
+          {item.label}
+          <Chevron open={open} />
+        </button>
+      )}
       <div
         id={panelId}
         hidden={!open}
@@ -154,19 +180,23 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
         "z-40",
         overlay
           ? "absolute inset-x-0 top-0 text-white"
-          : "sticky top-0 border-b border-charcoal/10 bg-dominant-1/90 text-charcoal backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-dominant-1",
+          : "sticky top-0 bg-paper text-ink shadow-[0_1px_0_rgb(22_59_95/0.06)]",
       )}
     >
       <Container
         className={cx(
           "flex items-center justify-between gap-6",
-          overlay ? "min-h-28 max-w-none md:px-8" : "min-h-20",
+          "max-w-none md:px-8",
+          overlay ? "min-h-28" : "min-h-24",
         )}
       >
-        <Logo className={cx(overlay && "text-halo")} />
+        {/* Wordmark in Garet: white on the home splash, orange elsewhere */}
+        <div data-brand className={cx("font-brand", overlay ? "text-halo" : "text-accent-1")}>
+          <Logo />
+        </div>
 
         <nav ref={navRef} aria-label="Main" className="hidden xl:block">
-          <ul className={cx("flex items-center", overlay ? "gap-4 2xl:gap-8" : "gap-0.5")}>
+          <ul className="flex items-center gap-2 2xl:gap-6">
             {nav.map((item) =>
               item.children ? (
                 <Dropdown
@@ -192,18 +222,13 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
           </ul>
         </nav>
 
-        <div className={cx("flex items-center gap-3", overlay && "xl:hidden")}>
-          <div className={cx("hidden", !overlay && "sm:block")}>
-            <ButtonLink to={bookCta.to} variant="cta" className="whitespace-nowrap">
-              {bookCta.label}
-            </ButtonLink>
-          </div>
+        <div className="flex items-center gap-3 xl:hidden">
           <button
             ref={buttonRef}
             type="button"
             className={cx(
               "inline-flex min-h-12 items-center gap-2 rounded-pill border-2 px-4 font-semibold xl:hidden",
-              overlay ? "text-halo border-white bg-white/10" : "border-charcoal",
+              overlay ? "text-halo border-white bg-white/10" : "border-ember text-ember",
             )}
             aria-expanded={open}
             aria-controls={menuId}
@@ -240,7 +265,17 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
             {nav.map((item) =>
               item.children ? (
                 <li key={item.label}>
-                  <p className="text-eyebrow-style px-4 pb-1 text-secondary-dark">{item.label}</p>
+                  {item.to ? (
+                    <NavLink
+                      to={item.to}
+                      end
+                      className="text-eyebrow-style block rounded-2xl px-4 pb-1 text-secondary-dark no-underline hover:bg-dominant-2"
+                    >
+                      {item.label}
+                    </NavLink>
+                  ) : (
+                    <p className="text-eyebrow-style px-4 pb-1 text-secondary-dark">{item.label}</p>
+                  )}
                   <SubList items={item.children} />
                 </li>
               ) : (
@@ -261,7 +296,7 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
               ),
             )}
           </ul>
-          <div className={cx("mt-6", !overlay && "sm:hidden")}>
+          <div className="mt-6">
             <ButtonLink to={bookCta.to} variant="cta" size="lg" className="w-full">
               {bookCta.label}
             </ButtonLink>

@@ -35,6 +35,13 @@
 | `accent-1`    | `#FF854D` | Highlights, badges, call-outs |
 | `accent-dark` | `#993608` | Accent text, pressed states   |
 
+### Services page
+
+| Token   | Hex       | Usage                              |
+| ------- | --------- | ---------------------------------- |
+| `sun`   | `#FADC6E` | Counselling shape (fill)           |
+| `ember` | `#B94C18` | Inner-page menu text (AA on cream) |
+
 ### Footer
 
 | Token   | Hex       | Usage                     |

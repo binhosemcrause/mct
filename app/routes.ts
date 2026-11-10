@@ -13,7 +13,7 @@ export default [
 
   stub("about/our-story"),
   stub("about/therapy-for-all"),
-  stub("services"),
+  route("services", "routes/services.tsx"),
   stub("services/counselling"),
   stub("services/creative-arts-therapy"),
   stub("services/dance-movement-therapy"),

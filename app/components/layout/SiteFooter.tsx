@@ -18,7 +18,7 @@ export function SiteFooter() {
       <Container className="relative grid gap-12 pt-20 pb-10 lg:grid-cols-12">
         <div className="flex flex-col gap-5 lg:col-span-4">
           {/* Brand wordmark: Garet in accent orange (logotypes are exempt from contrast rules) */}
-          <div className="font-brand text-accent-1">
+          <div data-brand className="font-brand text-accent-1">
             <Logo size="lg" mark />
           </div>
           <div className="flex max-w-sm flex-col gap-3">

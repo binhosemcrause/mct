@@ -8,6 +8,8 @@ for (const path of paths) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(path);
     const results = await new AxeBuilder({ page })
+      // The wordmark is a logotype, which WCAG exempts from contrast requirements
+      .exclude("[data-brand]")
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();
     expect(

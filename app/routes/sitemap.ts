@@ -2,7 +2,7 @@ import { pages } from "~/config/pages";
 import { absoluteUrl } from "~/lib/seo";
 
 /** Pages that are live (not stubs). Add paths here as each page is built. */
-export const LIVE_PATHS = ["/", "/contact"] as const;
+export const LIVE_PATHS = ["/", "/contact", "/services"] as const;
 
 export function loader() {
   const urls = LIVE_PATHS.filter((p) => pages[p]?.inSitemap)
