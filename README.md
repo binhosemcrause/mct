@@ -36,7 +36,7 @@ After changing `app/db/schema.ts`: `pnpm db:generate --name <change>` then `pnpm
 ## Before launch — content to confirm
 
 Unconfirmed facts are marked `TODO` in code and render as **dashed purple placeholders** on the site.
-`grep -rn "TODO" app/` lists them all. Main ones: phone, opening hours, Instagram URL, booking-platform link,
+`grep -rn "TODO" app/` lists them all. Main ones: phone, opening hours, booking-platform link,
 practitioner qualifications and registration numbers, Therapy for All fee details, parking/access/transport,
 real photos (studio, materials, portraits) and consented testimonials.
 

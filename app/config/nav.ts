@@ -58,4 +58,14 @@ export function isActiveItem(item: NavItem, pathname: string): boolean {
   return item.to === pathname || (item.children ?? []).some((c) => isActiveItem(c, pathname));
 }
 
+/** Footer "Explore" links: a curated shortlist, not the full menu. */
+export const footerLinks = [
+  { label: "Therapy for all", to: "/about/therapy-for-all" },
+  { label: "Counselling", to: "/services/counselling" },
+  { label: "Creative arts therapy", to: "/services/creative-arts-therapy" },
+  { label: "Dance movement therapy", to: "/services/dance-movement-therapy" },
+  { label: "Corporate wellbeing workshops", to: "/services/workshops/corporate-wellbeing" },
+  { label: "Creative circle", to: "/creative-circle" },
+] as const;
+
 export const bookCta = { label: "Book a free 15-min chat", to: "/contact#book" } as const;

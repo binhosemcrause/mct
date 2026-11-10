@@ -1,17 +1,16 @@
 import { Link } from "react-router";
 import { Brushstroke } from "~/components/art/Brushstroke";
 import { Container } from "~/components/ui/Layout";
-import { Fact, Todo } from "~/components/ui/Todo";
-import { flattenNav, type NavItem } from "~/config/nav";
-import { acknowledgementOfCountry, isPlaceholder, site } from "~/config/site";
+import { footerLinks } from "~/config/nav";
+import { acknowledgementOfCountry, site } from "~/config/site";
 import { CrisisNote } from "./CrisisNote";
 import { Logo } from "./Logo";
 
-export function SiteFooter({ nav }: { nav: NavItem[] }) {
-  const { contact, address } = site;
+export function SiteFooter() {
+  const { contact } = site;
   const year = new Date().getFullYear();
   return (
-    <footer className="paper-grain relative overflow-hidden bg-paper">
+    <footer className="paper-grain relative overflow-hidden bg-paper text-ink">
       <Brushstroke
         variant="echo"
         className="pointer-events-none absolute -top-40 -right-40 size-[34rem] text-primary-1"
@@ -29,57 +28,27 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
         </div>
 
         <div className="flex flex-col gap-3 lg:col-span-3">
-          <h2 className="text-eyebrow-style font-body text-secondary-dark">
-            Visit or get in touch
-          </h2>
-          <address className="not-italic">
-            {address.streetAddress}
-            <br />
-            {address.locality} {address.region} {address.postcode}
-          </address>
+          <h2 className="text-eyebrow-style font-body text-ink">Visit or get in touch</h2>
+          <p>Melbourne</p>
           <p>
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            <a href={`mailto:${contact.email}`} className="text-ink">
+              {contact.email}
+            </a>
           </p>
           <p>
-            {isPlaceholder(contact.phoneE164) ? (
-              <Fact value={contact.phone} />
-            ) : (
-              <a href={`tel:${contact.phoneE164}`}>{contact.phone}</a>
-            )}
-          </p>
-          <div>
-            <h3 className="sr-only">Opening hours</h3>
-            {site.hours.length === 0 ? (
-              <Todo>TODO: opening hours</Todo>
-            ) : (
-              <ul>
-                {site.hours.map((h) => (
-                  <li key={h.days.join()}>
-                    {h.days.length > 1 ? `${h.days[0]} – ${h.days.at(-1)}` : h.days[0]}: {h.opens}–
-                    {h.closes}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <p>
-            {isPlaceholder(contact.instagram) ? (
-              <Fact value={contact.instagram} />
-            ) : (
-              <a href={contact.instagram} rel="me noopener" target="_blank">
-                Follow Moving Circle on Instagram
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            )}
+            <a href={contact.instagram} rel="me noopener" target="_blank" className="text-ink">
+              @movingcircletherapy
+              <span className="sr-only"> on Instagram (opens in a new tab)</span>
+            </a>
           </p>
         </div>
 
         <nav aria-label="Footer" className="lg:col-span-2">
-          <h2 className="text-eyebrow-style mb-3 font-body text-secondary-dark">Explore</h2>
+          <h2 className="text-eyebrow-style mb-3 font-body text-ink">Explore</h2>
           <ul className="flex flex-col gap-2">
-            {[{ label: "Home", to: "/" }, ...flattenNav(nav)].map((item) => (
+            {footerLinks.map((item) => (
               <li key={item.label}>
-                <Link to={item.to} className="text-charcoal">
+                <Link to={item.to} className="text-ink">
                   {item.label}
                 </Link>
               </li>
@@ -91,15 +60,15 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
           <CrisisNote />
         </div>
 
-        <div className="border-t border-charcoal/15 pt-8 lg:col-span-12">
+        <div className="border-t border-ink/15 pt-8 lg:col-span-12">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
             <li>
-              <Link to="/privacy" className="text-charcoal">
+              <Link to="/privacy" className="text-ink">
                 Privacy policy
               </Link>
             </li>
             <li>
-              <Link to="/terms" className="text-charcoal">
+              <Link to="/terms" className="text-ink">
                 Terms of use
               </Link>
             </li>
@@ -110,7 +79,7 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
         </div>
 
         {/* Last thing on every page */}
-        <p className="font-body text-small text-ink lg:col-span-12">
+        <p className="font-body text-small lg:col-span-12">
           <span className="font-semibold">Acknowledgement of Country. </span>
           {acknowledgementOfCountry}
         </p>

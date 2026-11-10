@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
         </main>
-        <SiteFooter nav={nav} />
+        <SiteFooter />
         <ScrollRestoration />
         <Scripts />
       </body>

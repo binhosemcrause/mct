@@ -25,7 +25,7 @@ export const site = {
     phone: `${TODO}: phone number`,
     /** E.164 form for tel: links, e.g. +61400000000 */
     phoneE164: `${TODO}`,
-    instagram: `${TODO}: Instagram profile URL`,
+    instagram: "https://www.instagram.com/movingcircletherapy/",
     bookingUrl: `${TODO}: Cliniko / Halaxy / SimplyBook booking link`,
     responseTime: "within 24 hours (Monday to Friday)",
   },

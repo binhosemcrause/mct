@@ -37,10 +37,10 @@
 
 ### Footer
 
-| Token   | Hex       | Usage                           |
-| ------- | --------- | ------------------------------- |
-| `paper` | `#FEFAF5` | Footer background               |
-| `ink`   | `#163B5F` | Acknowledgement of Country text |
+| Token   | Hex       | Usage                     |
+| ------- | --------- | ------------------------- |
+| `paper` | `#FEFAF5` | Footer background         |
+| `ink`   | `#163B5F` | All footer text and links |
 
 ---
 

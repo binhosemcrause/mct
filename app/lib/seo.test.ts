@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { pages } from "~/config/pages";
-import { flattenNav, primaryNav } from "~/config/nav";
+import { flattenNav, footerLinks, primaryNav } from "~/config/nav";
 import { businessJsonLd, pageMeta } from "./seo";
 
 describe("pageMeta", () => {
@@ -67,6 +67,6 @@ describe("primaryNav", () => {
   });
 
   it("only links to pages that exist in the page registry", () => {
-    for (const { to } of flattenNav()) expect(pages[to], to).toBeDefined();
+    for (const { to } of [...flattenNav(), ...footerLinks]) expect(pages[to], to).toBeDefined();
   });
 });
