@@ -32,7 +32,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 lg:col-span-3">
+        <div className="flex flex-col gap-3 lg:col-span-4">
           <h2 className="text-eyebrow-style font-body text-accent-1">Get in touch</h2>
           <p>Melbourne</p>
           <p>
@@ -46,24 +46,26 @@ export function SiteFooter() {
               <span className="sr-only"> on Instagram (opens in a new tab)</span>
             </a>
           </p>
+          <div className="mt-4 max-w-sm">
+            <CrisisNote />
+          </div>
         </div>
 
-        <nav aria-label="Footer" className="lg:col-span-2">
+        <nav aria-label="Footer" className="lg:col-span-4">
           <h2 className="text-eyebrow-style mb-3 font-body text-accent-1">Explore</h2>
           <ul className="flex flex-col gap-2">
             {footerLinks.map((item) => (
               <li key={item.label}>
-                <Link to={item.to} className="text-ink no-underline hover:underline">
+                <Link
+                  to={item.to}
+                  className="whitespace-nowrap text-ink no-underline hover:underline"
+                >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-
-        <div className="flex flex-col gap-6 lg:col-span-3">
-          <CrisisNote />
-        </div>
 
         <div className="border-t border-ink/15 pt-8 lg:col-span-12">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
