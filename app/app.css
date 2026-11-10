@@ -144,8 +144,8 @@
   .aura-soft {
     background-color: #e5eaf0;
     background-image:
-      radial-gradient(ellipse 34vmin 28vmin at 42% 92%, rgb(250 214 140 / 0.75), transparent 75%),
-      radial-gradient(ellipse 50vmin 60vmin at 45% 45%, rgb(246 196 168 / 0.7), transparent 72%);
+      radial-gradient(ellipse 42vmin 32vmin at 46% 96%, rgb(250 218 150 / 0.85), transparent 75%),
+      radial-gradient(ellipse 70vmin 85vmin at 48% 42%, rgb(246 198 172 / 0.85), transparent 72%);
   }
   /* White text on the aura: a tight blue halo keeps it at AA contrast over the light
      areas (WCAG measures haloed text against the halo) without a visible box. */

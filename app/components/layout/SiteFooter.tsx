@@ -32,23 +32,33 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 lg:col-span-4">
+        {/* w-fit: the column is as wide as its widest line (the email), so the crisis box matches it */}
+        <div className="flex w-fit flex-col gap-3 lg:col-span-4">
           <h2 className="text-eyebrow-style font-body text-accent-1">Get in touch</h2>
-          <p>Melbourne</p>
+          <p className="flex items-center gap-3">
+            <ContactIcon name="location" width={68} height={100} />
+            Melbourne
+          </p>
           <p>
-            <a href={`mailto:${contact.email}`} className="text-ink">
+            <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-3 text-ink">
+              <ContactIcon name="email" width={138} height={96} />
               {contact.email}
             </a>
           </p>
           <p>
-            <a href={contact.instagram} rel="me noopener" target="_blank" className="text-ink">
+            <a
+              href={contact.instagram}
+              rel="me noopener"
+              target="_blank"
+              className="inline-flex items-center gap-3 text-ink"
+            >
+              <ContactIcon name="instagram" width={122} height={115} />
               @movingcircletherapy
               <span className="sr-only"> on Instagram (opens in a new tab)</span>
             </a>
           </p>
-          <div className="mt-4 max-w-sm">
-            <CrisisNote />
-          </div>
+          {/* w-0 min-w-full: fills the column without widening it */}
+          <CrisisNote className="mt-4 w-0 min-w-full" />
         </div>
 
         <nav aria-label="Footer" className="lg:col-span-4">
@@ -92,5 +102,21 @@ export function SiteFooter() {
         </p>
       </Container>
     </footer>
+  );
+}
+
+/** Hand-drawn contact icons (decorative: each sits beside its text label). */
+function ContactIcon({ name, width, height }: { name: string; width: number; height: number }) {
+  return (
+    <span aria-hidden="true" className="grid w-9 shrink-0 place-items-center">
+      <img
+        src={`/brand/icons/${name}.png`}
+        alt=""
+        width={width}
+        height={height}
+        loading="lazy"
+        className="h-7 w-auto max-w-9 object-contain"
+      />
+    </span>
   );
 }
