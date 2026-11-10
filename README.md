@@ -40,6 +40,11 @@ Unconfirmed facts are marked `TODO` in code and render as **dashed purple placeh
 practitioner qualifications and registration numbers, Therapy for All fee details, parking/access/transport,
 real photos (studio, materials, portraits) and consented testimonials.
 
+## Fonts
+
+The footer wordmark uses **Garet** (Spacetype, licensed — not on Google Fonts). Put the web files in
+`public/fonts/` as `garet-book.woff2` (400) and `garet-heavy.woff2` (700). Until then it falls back to Josefin Sans.
+
 ## Design system
 
 Tokens: `app/app.css` (`@theme`), from `DESIGN.md`. Live reference: `/design-system` (not indexed).

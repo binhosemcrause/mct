@@ -2,6 +2,20 @@
 @import "@fontsource-variable/josefin-sans/wght-italic.css";
 @import "tailwindcss";
 
+/* Garet (Spacetype) — brand wordmark only. Licensed files are self-hosted in public/fonts. */
+@font-face {
+  font-family: "Garet";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/garet-book.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Garet";
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/garet-heavy.woff2") format("woff2");
+}
+
 /*
  * Design tokens — source of truth is DESIGN.md.
  * Colour roles (60/30/10):
@@ -35,6 +49,7 @@
   --color-current: currentColor;
 
   --font-body: "Josefin Sans Variable", system-ui, sans-serif;
+  --font-brand: "Garet", "Josefin Sans Variable", system-ui, sans-serif;
 
   /* Type scale — DESIGN.md sizes are the desktop maximums; fluid down to mobile. */
   --text-h0: clamp(3rem, 1.9rem + 5.2vw, 4.5rem);

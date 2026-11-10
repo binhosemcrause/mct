@@ -48,10 +48,11 @@
 
 ### Font families
 
-| Role     | Font           | Fallback                |
-| -------- | -------------- | ----------------------- |
-| Headings | `Josefin Sans` | `system-ui, sans-serif` |
-| Body     | `Josefin Sans` | `system-ui, sans-serif` |
+| Role            | Font                | Fallback                |
+| --------------- | ------------------- | ----------------------- |
+| Headings        | `Josefin Sans`      | `system-ui, sans-serif` |
+| Body            | `Josefin Sans`      | `system-ui, sans-serif` |
+| Footer wordmark | `Garet` (`#FF854D`) | `Josefin Sans`          |
 
 ### Type scale
 

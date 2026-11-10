@@ -17,7 +17,10 @@ export function SiteFooter() {
       />
       <Container className="relative grid gap-12 pt-20 pb-10 lg:grid-cols-12">
         <div className="flex flex-col gap-5 lg:col-span-4">
-          <Logo size="lg" mark />
+          {/* Brand wordmark: Garet in accent orange (logotypes are exempt from contrast rules) */}
+          <div className="font-brand text-accent-1">
+            <Logo size="lg" mark />
+          </div>
           <p className="max-w-sm">
             Supporting individuals and groups through movement, creativity and connection. Our
             qualified creative arts therapists and counsellors offer creative arts therapy, dance
