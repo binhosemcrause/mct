@@ -1,6 +1,6 @@
 # Moving Circle Therapy — website
 
-Counselling and creative arts therapy practice in Chelsea, VIC. Tagline: _Every movement is a story._
+Counselling and creative arts therapy practice in Chelsea, VIC. Tagline: _Your journey to holistic wellbeing through art and movement._
 
 React Router 8 (framework mode, pre-rendered) · React 19 · TypeScript · Tailwind CSS 4 · Drizzle ORM · Neon Postgres.
 

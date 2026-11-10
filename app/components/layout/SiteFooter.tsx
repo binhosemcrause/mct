@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { Brushstroke } from "~/components/art/Brushstroke";
 import { Container } from "~/components/ui/Layout";
 import { Fact, Todo } from "~/components/ui/Todo";
@@ -10,10 +10,8 @@ import { Logo } from "./Logo";
 export function SiteFooter({ nav }: { nav: NavItem[] }) {
   const { contact, address } = site;
   const year = new Date().getFullYear();
-  // The home page ends with its own full Acknowledgement section
-  const isHome = useLocation().pathname === "/";
   return (
-    <footer className="paper-grain relative overflow-hidden bg-dominant-2">
+    <footer className="paper-grain relative overflow-hidden bg-paper">
       <Brushstroke
         variant="echo"
         className="pointer-events-none absolute -top-40 -right-40 size-[34rem] text-primary-1"
@@ -22,8 +20,10 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
         <div className="flex flex-col gap-5 lg:col-span-4">
           <Logo size="lg" mark />
           <p className="max-w-sm">
-            Counselling and creative arts therapy in Chelsea, for people across the Mornington
-            Peninsula, Bayside and south-east Melbourne.
+            Supporting individuals and groups through movement, creativity and connection. Our
+            qualified creative arts therapists and counsellors offer creative arts therapy, dance
+            movement therapy, counselling and group therapy programs to support mental health and
+            wellbeing needs.
           </p>
           <p className="text-item italic">{site.tagline}</p>
         </div>
@@ -91,16 +91,8 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
           <CrisisNote />
         </div>
 
-        <div className="flex flex-col gap-6 border-t border-charcoal/15 pt-8 lg:col-span-12 lg:flex-row lg:items-start lg:justify-between">
-          {isHome ? (
-            <span />
-          ) : (
-            <p className="max-w-3xl text-small">
-              <span className="font-semibold">Acknowledgement of Country. </span>
-              {acknowledgementOfCountry}
-            </p>
-          )}
-          <ul className="flex shrink-0 flex-wrap gap-x-6 gap-y-2 text-small">
+        <div className="border-t border-charcoal/15 pt-8 lg:col-span-12">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
             <li>
               <Link to="/privacy" className="text-charcoal">
                 Privacy policy
@@ -116,6 +108,12 @@ export function SiteFooter({ nav }: { nav: NavItem[] }) {
             </li>
           </ul>
         </div>
+
+        {/* Last thing on every page */}
+        <p className="font-body text-small text-ink lg:col-span-12">
+          <span className="font-semibold">Acknowledgement of Country. </span>
+          {acknowledgementOfCountry}
+        </p>
       </Container>
     </footer>
   );

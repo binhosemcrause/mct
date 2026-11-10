@@ -12,7 +12,7 @@ export const isPlaceholder = (value: string | null | undefined) => !value || val
 export const site = {
   name: "Moving Circle Therapy",
   shortName: "Moving Circle",
-  tagline: "Every movement is a story.",
+  tagline: "Your journey to holistic wellbeing through art and movement.",
   promise: "A safe, creative space to understand yourself — through words, art and movement.",
   description:
     "Counselling and creative arts therapy in Chelsea, Victoria. A warm, person-centred practice using words, art and movement — no artistic skill needed.",

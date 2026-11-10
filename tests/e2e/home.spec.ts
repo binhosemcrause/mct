@@ -14,13 +14,15 @@ test.describe("home page", () => {
     expect(ld.address.addressLocality).toBe("Chelsea");
   });
 
-  test("splash shows the logo, menu and Acknowledgement of Country", async ({ page }) => {
+  test("splash shows the logo; Acknowledgement of Country is in the footer", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Every movement is a story.",
+      "Your journey to holistic wellbeing through art and movement.",
     );
     await expect(page.getByRole("link", { name: "Read our story" })).toBeVisible();
-    await expect(page.getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/)).toBeVisible();
+    await expect(
+      page.getByRole("contentinfo").getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/),
+    ).toBeAttached();
     await expect(
       page.getByRole("contentinfo").getByText("This service isn't for emergencies."),
     ).toBeAttached();

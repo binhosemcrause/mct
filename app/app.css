@@ -27,6 +27,9 @@
   --color-accent-dark: #993608;
   /* Functional (not brand) — form errors only; 7.0:1 on dominant-1 */
   --color-error: #9b2335;
+  /* Footer */
+  --color-paper: #fefaf5;
+  --color-ink: #163b5f;
   --color-white: #ffffff;
   --color-transparent: transparent;
   --color-current: currentColor;

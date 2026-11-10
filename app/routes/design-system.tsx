@@ -78,7 +78,7 @@ const typeScale = [
   {
     token: "text-h0",
     name: "Display · Josefin Sans 600 · 72",
-    sample: "Every movement is a story.",
+    sample: "Your journey to holistic wellbeing through art and movement.",
   },
   {
     token: "text-h1",

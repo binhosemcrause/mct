@@ -35,6 +35,13 @@
 | `accent-1`    | `#FF854D` | Highlights, badges, call-outs |
 | `accent-dark` | `#993608` | Accent text, pressed states   |
 
+### Footer
+
+| Token   | Hex       | Usage                           |
+| ------- | --------- | ------------------------------- |
+| `paper` | `#FEFAF5` | Footer background               |
+| `ink`   | `#163B5F` | Acknowledgement of Country text |
+
 ---
 
 ## Typography
