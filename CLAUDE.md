@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Design rules (from DESIGN.md — tokens in `app/app.css` `@theme`)
 
-- Default Tailwind colours are disabled. Use only the brand tokens. Accent orange (`accent-1`/`accent-dark`) is **only** for CTA buttons (`variant="cta"`) and the footer wordmark. Text on any `*-1` soft fill must be `charcoal`. `error` is a functional colour for forms only.
+- Default Tailwind colours are disabled. Use only the brand tokens. Accent orange (`accent-1`/`accent-dark`) is **only** for CTA buttons (`variant="cta"`) and the footer wordmark and footer headings. Text on any `*-1` soft fill must be `charcoal`. `error` is a functional colour for forms only.
 - Type: Josefin Sans everywhere except the footer wordmark (`font-brand`, Garet, self-hosted from `public/fonts/`). Headings semibold (set globally), body 18px / 1.6. Use the type tokens `text-h0…text-item`, `text-lead`, `text-body`, `text-small`.
 - Build pages from `components/ui` (Button, Section, SectionHeader, Container, Card, Field, Photo) and `components/art/Brushstroke`. `/design-system` shows them all.
 - No stock photos of people. Use `<Brushstroke>` art until real photos (with consent) arrive. Placeholder photos are registered in `content/photos.ts` with a visible "replace with" label.

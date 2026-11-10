@@ -21,17 +21,19 @@ export function SiteFooter() {
           <div className="font-brand text-accent-1">
             <Logo size="lg" mark />
           </div>
-          <p className="max-w-sm">
-            Supporting individuals and groups through movement, creativity and connection. Our
-            qualified creative arts therapists and counsellors offer creative arts therapy, dance
-            movement therapy, counselling and group therapy programs to support mental health and
-            wellbeing needs.
-          </p>
-          <p className="text-item italic">{site.tagline}</p>
+          <div className="flex max-w-sm flex-col gap-3">
+            <p className="font-bold italic">{site.tagline}</p>
+            <p>
+              Supporting individuals and groups through movement, creativity and connection. Our
+              qualified creative arts therapists and counsellors offer creative arts therapy, dance
+              movement therapy, counselling and group therapy programs to support mental health and
+              wellbeing needs.
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-3 lg:col-span-3">
-          <h2 className="text-eyebrow-style font-body text-ink">Get in touch</h2>
+          <h2 className="text-eyebrow-style font-body text-accent-1">Get in touch</h2>
           <p>Melbourne</p>
           <p>
             <a href={`mailto:${contact.email}`} className="text-ink">
@@ -47,7 +49,7 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Footer" className="lg:col-span-2">
-          <h2 className="text-eyebrow-style mb-3 font-body text-ink">Explore</h2>
+          <h2 className="text-eyebrow-style mb-3 font-body text-accent-1">Explore</h2>
           <ul className="flex flex-col gap-2">
             {footerLinks.map((item) => (
               <li key={item.label}>
