@@ -31,7 +31,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-3 lg:col-span-3">
-          <h2 className="text-eyebrow-style font-body text-ink">Visit or get in touch</h2>
+          <h2 className="text-eyebrow-style font-body text-ink">Get in touch</h2>
           <p>Melbourne</p>
           <p>
             <a href={`mailto:${contact.email}`} className="text-ink">
@@ -51,7 +51,7 @@ export function SiteFooter() {
           <ul className="flex flex-col gap-2">
             {footerLinks.map((item) => (
               <li key={item.label}>
-                <Link to={item.to} className="text-ink">
+                <Link to={item.to} className="text-ink no-underline hover:underline">
                   {item.label}
                 </Link>
               </li>
