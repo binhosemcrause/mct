@@ -92,19 +92,15 @@ function Dropdown({
       }}
     >
       {item.to ? (
-        // Group with its own page (Services): the label navigates, the chevron opens the list
-        <span className="inline-flex items-center">
-          <NavLink
-            to={item.to}
-            end
-            className={() => cx(topItem(isActiveItem(item, pathname), overlay), "pr-1")}
-            prefetch="intent"
-          >
+        // Group with its own page (Services): one box like the other groups, but the label
+        // navigates and the chevron opens the list
+        <span className={topItem(isActiveItem(item, pathname), overlay)}>
+          <NavLink to={item.to} end className="text-inherit no-underline" prefetch="intent">
             {item.label}
           </NavLink>
           <button
             type="button"
-            className={cx(topItem(false, overlay), "px-2")}
+            className="-my-2 -mr-3 -ml-1.5 inline-flex items-center self-stretch rounded-r-pill pr-3 pl-1.5"
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={`${item.label} menu`}

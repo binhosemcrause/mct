@@ -11,15 +11,18 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="paper-grain relative overflow-hidden bg-paper text-ink">
+      {/* Inner 8 rings only, at 60% strength, so the rings stay a quiet backdrop */}
       <Brushstroke
         variant="echo"
-        className="pointer-events-none absolute -top-40 -right-40 size-[34rem] text-primary-1"
+        rings={8}
+        className="pointer-events-none absolute -bottom-48 -left-48 size-[34rem] text-primary-1 opacity-60"
       />
-      <Container className="relative grid gap-12 pt-20 pb-10 lg:grid-cols-12">
-        <div className="flex flex-col gap-5 lg:col-span-4">
+      {/* Four columns on wide screens: brand, contact, links, crisis box (two per row on tablets) */}
+      <Container className="relative grid gap-x-10 gap-y-12 pt-20 pb-10 md:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_auto_auto_minmax(0,1fr)] xl:gap-x-12">
+        <div className="flex flex-col gap-5 text-[1rem]">
           {/* Brand wordmark: Garet in accent orange (logotypes are exempt from contrast rules) */}
           <div data-brand className="font-brand text-accent-1">
-            <Logo size="lg" mark />
+            <Logo mark />
           </div>
           <div className="flex max-w-sm flex-col gap-3">
             <p className="font-bold italic">{site.tagline}</p>
@@ -32,8 +35,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* w-fit: the column is as wide as its widest line (the email), so the crisis box matches it */}
-        <div className="flex w-fit flex-col gap-3 lg:col-span-4">
+        <div className="flex flex-col gap-3 text-[1rem]">
           <h2 className="text-eyebrow-style font-body text-accent-1">Get in touch</h2>
           <p className="flex items-center gap-3">
             <ContactIcon name="location" width={68} height={100} />
@@ -60,11 +62,9 @@ export function SiteFooter() {
               <span className="sr-only"> on Instagram (opens in a new tab)</span>
             </a>
           </p>
-          {/* w-0 min-w-full: fills the column without widening it */}
-          <CrisisNote className="mt-4 w-0 min-w-full" />
         </div>
 
-        <nav aria-label="Footer" className="lg:col-span-4">
+        <nav aria-label="Footer" className="text-[1rem]">
           <h2 className="text-eyebrow-style mb-3 font-body text-accent-1">Explore</h2>
           <ul className="flex flex-col gap-2">
             {footerLinks.map((item) => (
@@ -80,7 +80,9 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <div className="border-t border-ink/15 pt-8 lg:col-span-12">
+        <CrisisNote className="self-start text-[1rem]" />
+
+        <div className="col-span-full border-t border-ink/15 pt-8">
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
             <li>
               <Link to="/privacy" className="text-ink">
@@ -99,7 +101,7 @@ export function SiteFooter() {
         </div>
 
         {/* Last thing on every page */}
-        <p className="font-body text-small lg:col-span-12">
+        <p className="col-span-full font-body text-small">
           <span className="font-semibold">Acknowledgement of Country. </span>
           {acknowledgementOfCountry}
         </p>

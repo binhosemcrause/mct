@@ -14,10 +14,14 @@ export default [
   stub("about/our-story"),
   stub("about/therapy-for-all"),
   route("services", "routes/services.tsx"),
-  stub("services/counselling"),
-  stub("services/creative-arts-therapy"),
-  stub("services/dance-movement-therapy"),
-  stub("services/workshops"),
+  route("services/counselling", "routes/service-detail.tsx", { id: "service:counselling" }),
+  route("services/creative-arts-therapy", "routes/service-detail.tsx", {
+    id: "service:creative-arts-therapy",
+  }),
+  route("services/dance-movement-therapy", "routes/service-detail.tsx", {
+    id: "service:dance-movement-therapy",
+  }),
+  route("services/workshops", "routes/service-detail.tsx", { id: "service:workshops" }),
   stub("services/workshops/corporate-wellbeing"),
   stub("referrals-ndis"),
   stub("resources/blog"),

@@ -14,6 +14,8 @@ interface Props {
   label?: string;
   /** Stretch to fill a non-square box (for wide bands) */
   stretch?: boolean;
+  /** Echo only: how many rings to draw, from the centre out (default 11) */
+  rings?: number;
 }
 
 /** Organic closed loop: a circle whose radius wobbles with low-frequency harmonics */
@@ -34,11 +36,10 @@ function organicLoop(cx0: number, cy0: number, r: number, seed: number) {
   return pts.join(" ") + "Z";
 }
 
-function Echo() {
-  const rings = Array.from({ length: 11 }, (_, i) => i);
+function Echo({ rings = 11 }: { rings?: number }) {
   return (
     <g fill="none" strokeLinecap="round" strokeWidth="2.2">
-      {rings.map((i) => (
+      {Array.from({ length: rings }, (_, i) => (
         <path
           key={i}
           d={organicLoop(200 + i * 1.6, 200 - i * 1.2, 34 + i * 15, 0.9 + i * 0.22)}
@@ -128,9 +129,15 @@ function Dabs() {
   );
 }
 
-const variants = { echo: Echo, swirl: Swirl, scribble: Scribble, wave: Wave, dabs: Dabs };
+const variants: Record<BrushVariant, (p: { rings?: number }) => React.JSX.Element> = {
+  echo: Echo,
+  swirl: Swirl,
+  scribble: Scribble,
+  wave: Wave,
+  dabs: Dabs,
+};
 
-export function Brushstroke({ variant, className, label, stretch }: Props) {
+export function Brushstroke({ variant, className, label, stretch, rings }: Props) {
   const titleId = useId();
   const Art = variants[variant];
   return (
@@ -143,7 +150,7 @@ export function Brushstroke({ variant, className, label, stretch }: Props) {
         : { "aria-hidden": true, focusable: false })}
     >
       {label && <title id={titleId}>{label}</title>}
-      <Art />
+      <Art rings={rings} />
     </svg>
   );
 }

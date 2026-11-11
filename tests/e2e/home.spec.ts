@@ -97,6 +97,16 @@ test.describe("home page", () => {
       await expect(page.getByRole("main").getByRole("link", { name })).toBeVisible();
   });
 
+  test("a service shape opens that service beside its description", async ({ page }) => {
+    await page.goto("/services");
+    await page.getByRole("main").getByRole("link", { name: "Counselling" }).click();
+    await expect(page).toHaveURL(/\/services\/counselling$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName("Counselling");
+    await expect(page.getByText(/Counselling provides emotional support/)).toBeVisible();
+    // The other shapes aren't shown on a service's own page
+    await expect(page.getByRole("main").getByRole("link")).toHaveCount(0);
+  });
+
   test("hovering Services shows its options", async ({ page, isMobile }) => {
     test.skip(isMobile, "hover menus are for wide screens");
     await page.goto("/contact");
