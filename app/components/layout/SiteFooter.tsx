@@ -11,12 +11,13 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="paper-grain relative overflow-hidden bg-paper text-ink">
-      {/* Inner 8 rings only, alternating orange and beige at 20% strength, so the rings stay a quiet backdrop */}
+      {/* Inner 8 rings only, alternating orange and beige, every ring at 30% strength */}
       <Brushstroke
         variant="echo"
         rings={8}
         ringClasses={["stroke-accent-1", "stroke-dominant-2"]}
-        className="pointer-events-none absolute -bottom-48 -left-48 size-[34rem] opacity-20"
+        fade={false}
+        className="pointer-events-none absolute -bottom-48 -left-48 size-[34rem] opacity-30"
       />
       {/* Four columns on wide screens: brand, contact, links, crisis box (two per row on tablets) */}
       <Container className="relative grid gap-x-10 gap-y-12 pt-20 pb-10 md:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_auto_auto_minmax(0,1fr)] xl:gap-x-12">

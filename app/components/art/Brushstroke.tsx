@@ -18,6 +18,8 @@ interface Props {
   rings?: number;
   /** Echo only: stroke classes applied to the rings in turn (default: all `currentColor`) */
   ringClasses?: string[];
+  /** Echo only: fade the rings as they move outward (default true) */
+  fade?: boolean;
 }
 
 /** Organic closed loop: a circle whose radius wobbles with low-frequency harmonics */
@@ -38,9 +40,9 @@ function organicLoop(cx0: number, cy0: number, r: number, seed: number) {
   return pts.join(" ") + "Z";
 }
 
-type EchoProps = Pick<Props, "rings" | "ringClasses">;
+type EchoProps = Pick<Props, "rings" | "ringClasses" | "fade">;
 
-function Echo({ rings = 11, ringClasses }: EchoProps) {
+function Echo({ rings = 11, ringClasses, fade = true }: EchoProps) {
   return (
     <g fill="none" strokeLinecap="round" strokeWidth="2.2">
       {Array.from({ length: rings }, (_, i) => (
@@ -49,7 +51,7 @@ function Echo({ rings = 11, ringClasses }: EchoProps) {
           d={organicLoop(200 + i * 1.6, 200 - i * 1.2, 34 + i * 15, 0.9 + i * 0.22)}
           stroke="currentColor"
           className={ringClasses?.[i % ringClasses.length]}
-          opacity={1 - i * 0.055}
+          opacity={fade ? 1 - i * 0.055 : undefined}
         />
       ))}
     </g>
@@ -142,7 +144,15 @@ const variants: Record<BrushVariant, (p: EchoProps) => React.JSX.Element> = {
   dabs: Dabs,
 };
 
-export function Brushstroke({ variant, className, label, stretch, rings, ringClasses }: Props) {
+export function Brushstroke({
+  variant,
+  className,
+  label,
+  stretch,
+  rings,
+  ringClasses,
+  fade,
+}: Props) {
   const titleId = useId();
   const Art = variants[variant];
   return (
@@ -155,7 +165,7 @@ export function Brushstroke({ variant, className, label, stretch, rings, ringCla
         : { "aria-hidden": true, focusable: false })}
     >
       {label && <title id={titleId}>{label}</title>}
-      <Art rings={rings} ringClasses={ringClasses} />
+      <Art rings={rings} ringClasses={ringClasses} fade={fade} />
     </svg>
   );
 }
