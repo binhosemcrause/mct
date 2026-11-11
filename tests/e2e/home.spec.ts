@@ -24,7 +24,9 @@ test.describe("home page", () => {
       page.getByRole("contentinfo").getByText(/Wurundjeri Woi-wurrung and Bunurong peoples/),
     ).toBeAttached();
     await expect(
-      page.getByRole("contentinfo").getByText("This service isn't for emergencies."),
+      page
+        .getByRole("contentinfo")
+        .getByText("Moving Circle Therapy is not able to respond in an emergency."),
     ).toBeAttached();
   });
 
@@ -93,6 +95,18 @@ test.describe("home page", () => {
       "Therapeutic Workshops",
     ])
       await expect(page.getByRole("main").getByRole("link", { name })).toBeVisible();
+  });
+
+  test("hovering Services shows its options", async ({ page, isMobile }) => {
+    test.skip(isMobile, "hover menus are for wide screens");
+    await page.goto("/contact");
+    const nav = page.getByRole("navigation", { name: "Main" });
+    await nav.getByRole("link", { name: "Services", exact: true }).hover();
+    await expect(nav.getByRole("link", { name: "Dance Movement Therapy" })).toBeVisible();
+    await nav.getByRole("link", { name: "Dance Movement Therapy" }).hover();
+    await expect(nav.getByRole("link", { name: "Dance Movement Therapy" })).toBeVisible();
+    await page.mouse.move(10, 600);
+    await expect(nav.getByRole("link", { name: "Dance Movement Therapy" })).toBeHidden();
   });
 
   test("serves sitemap.xml and robots.txt", async ({ request }) => {

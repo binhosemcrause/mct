@@ -51,10 +51,10 @@ export const site = {
 } as const;
 
 export const crisisNote = {
-  lead: "This service isn't for emergencies.",
-  body: "If you're in crisis, call",
+  lead: "Moving Circle Therapy is not able to respond in an emergency.",
+  body: "If you or someone you care about needs urgent care, support is available:",
   lines: [
-    { name: "Emergency", number: "000", tel: "000" },
+    { name: "For emergency", number: "000", tel: "000" },
     { name: "Lifeline", number: "13 11 14", tel: "131114" },
     { name: "Beyond Blue", number: "1300 22 4636", tel: "1300224636" },
   ],

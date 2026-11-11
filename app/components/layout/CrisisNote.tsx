@@ -8,29 +8,31 @@ export function CrisisNote({ className, inverse }: { className?: string; inverse
       aria-label="Crisis support"
       className={cx(
         "rounded-card p-5",
-        inverse ? "border-2 border-dominant-1/40 text-dominant-1" : "bg-primary-1 text-ink",
+        inverse ? "border-2 border-dominant-1/40 text-dominant-1" : "bg-mist text-ink",
         className,
       )}
     >
       <p>
-        <strong className="font-semibold">{crisisNote.lead}</strong> {crisisNote.body}{" "}
-        {crisisNote.lines.map((line, i) => (
-          <span key={line.tel}>
-            {i > 0 && (i === crisisNote.lines.length - 1 ? ", or " : ", ")}
-            {line.name !== "Emergency" && `${line.name} `}
-            <a
-              href={`tel:${line.tel}`}
-              className={cx(
-                "font-semibold whitespace-nowrap",
-                inverse ? "text-dominant-1" : "text-ink",
-              )}
-            >
-              {line.number}
-            </a>
-          </span>
-        ))}
-        .
+        <strong className="font-semibold">{crisisNote.lead}</strong> {crisisNote.body}
       </p>
+      <dl className="mt-4 flex flex-col gap-3">
+        {crisisNote.lines.map((line) => (
+          <div key={line.tel}>
+            <dt>{line.name}</dt>
+            <dd>
+              <a
+                href={`tel:${line.tel}`}
+                className={cx(
+                  "font-semibold whitespace-nowrap",
+                  inverse ? "text-dominant-1" : "text-ink",
+                )}
+              >
+                {line.number}
+              </a>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </aside>
   );
 }

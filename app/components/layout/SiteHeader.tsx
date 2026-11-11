@@ -14,7 +14,7 @@ const topItem = (active: boolean, overlay: boolean) =>
       ? // Home splash: white over the aura gradient
         "text-halo text-white hover:bg-white/15"
       : // Every other page: brand orange on the cream bar
-        "text-ember hover:bg-dominant-2",
+        "text-dusk hover:bg-primary-1/25",
     active && "font-bold",
   );
 
@@ -62,6 +62,7 @@ function Dropdown({
   item,
   open,
   onToggle,
+  onOpen,
   onClose,
   overlay,
 }: {
@@ -69,15 +70,22 @@ function Dropdown({
   overlay: boolean;
   open: boolean;
   onToggle: () => void;
+  onOpen: () => void;
   onClose: () => void;
 }) {
   const panelId = useId();
   const { pathname } = useLocation();
   const ref = useRef<HTMLLIElement>(null);
+  // A mouse has already opened the list on hover, so its click shouldn't close it again
+  const toggle = (e: React.MouseEvent) =>
+    (e.nativeEvent as PointerEvent).pointerType === "mouse" ? onOpen() : onToggle();
   return (
     <li
       ref={ref}
       className="relative"
+      // Mouse users get the list on hover; touch and keyboard use the toggle button
+      onPointerEnter={(e) => e.pointerType === "mouse" && onOpen()}
+      onPointerLeave={(e) => e.pointerType === "mouse" && onClose()}
       // Close when keyboard focus leaves the item and its panel
       onBlur={(e) => {
         if (!ref.current?.contains(e.relatedTarget as Node | null)) onClose();
@@ -100,7 +108,7 @@ function Dropdown({
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={`${item.label} menu`}
-            onClick={onToggle}
+            onClick={toggle}
           >
             <Chevron open={open} />
           </button>
@@ -111,7 +119,7 @@ function Dropdown({
           className={topItem(isActiveItem(item, pathname), overlay)}
           aria-expanded={open}
           aria-controls={panelId}
-          onClick={onToggle}
+          onClick={toggle}
         >
           {item.label}
           <Chevron open={open} />
@@ -120,9 +128,12 @@ function Dropdown({
       <div
         id={panelId}
         hidden={!open}
-        className="absolute top-full left-0 z-50 mt-2 w-max rounded-card border border-charcoal/10 bg-dominant-1 p-2 shadow-[0_24px_48px_-24px_rgb(43_38_48/0.35)]"
+        // pt-2 (not mt-2) so the pointer can cross the gap without leaving the item
+        className="absolute top-full left-0 z-50 w-max pt-2"
       >
-        <SubList items={item.children ?? []} />
+        <div className="rounded-card border border-charcoal/10 bg-dominant-1 p-2 shadow-[0_24px_48px_-24px_rgb(43_38_48/0.35)]">
+          <SubList items={item.children ?? []} />
+        </div>
       </div>
     </li>
   );
@@ -204,6 +215,7 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
                   item={item}
                   open={openGroup === item.label}
                   onToggle={() => setOpenGroup((g) => (g === item.label ? null : item.label))}
+                  onOpen={() => setOpenGroup(item.label)}
                   onClose={() => setOpenGroup((g) => (g === item.label ? null : g))}
                   overlay={overlay}
                 />
@@ -228,7 +240,7 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
             type="button"
             className={cx(
               "inline-flex min-h-12 items-center gap-2 rounded-pill border-2 px-4 font-semibold xl:hidden",
-              overlay ? "text-halo border-white bg-white/10" : "border-ember text-ember",
+              overlay ? "text-halo border-white bg-white/10" : "border-dusk text-dusk",
             )}
             aria-expanded={open}
             aria-controls={menuId}

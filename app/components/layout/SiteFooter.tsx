@@ -40,7 +40,10 @@ export function SiteFooter() {
             Melbourne
           </p>
           <p>
-            <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-3 text-ink">
+            <a
+              href={`mailto:${contact.email}`}
+              className="inline-flex items-center gap-3 text-ink no-underline hover:underline"
+            >
               <ContactIcon name="email" width={138} height={96} />
               {contact.email}
             </a>
@@ -50,10 +53,10 @@ export function SiteFooter() {
               href={contact.instagram}
               rel="me noopener"
               target="_blank"
-              className="inline-flex items-center gap-3 text-ink"
+              className="inline-flex items-center gap-3 text-ink no-underline hover:underline"
             >
               <ContactIcon name="instagram" width={122} height={115} />
-              @movingcircletherapy
+              movingcircletherapy
               <span className="sr-only"> on Instagram (opens in a new tab)</span>
             </a>
           </p>

@@ -41,8 +41,10 @@
   --color-accent-dark: #993608;
   /* Functional (not brand) — form errors only; 7.0:1 on dominant-1 */
   --color-error: #9b2335;
-  /* Inner-page menu text: AA-safe burnt orange (4.9:1 on paper) */
-  --color-ember: #b94c18;
+  /* Inner-page menu text: AA-safe deeper blue (4.8:1 on paper) */
+  --color-dusk: #3b74a8;
+  /* Crisis support box */
+  --color-mist: #d3e1ee;
   /* Services page counselling shape */
   --color-sun: #fadc6e;
   /* Footer */

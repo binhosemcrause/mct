@@ -37,10 +37,11 @@
 
 ### Services page
 
-| Token   | Hex       | Usage                              |
-| ------- | --------- | ---------------------------------- |
-| `sun`   | `#FADC6E` | Counselling shape (fill)           |
-| `ember` | `#B94C18` | Inner-page menu text (AA on cream) |
+| Token  | Hex       | Usage                              |
+| ------ | --------- | ---------------------------------- |
+| `sun`  | `#FADC6E` | Counselling shape (fill)           |
+| `dusk` | `#3B74A8` | Inner-page menu text (AA on cream) |
+| `mist` | `#D3E1EE` | Crisis support box                 |
 
 ### Footer
 
