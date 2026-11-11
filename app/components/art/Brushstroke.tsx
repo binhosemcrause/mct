@@ -16,6 +16,8 @@ interface Props {
   stretch?: boolean;
   /** Echo only: how many rings to draw, from the centre out (default 11) */
   rings?: number;
+  /** Echo only: stroke classes applied to the rings in turn (default: all `currentColor`) */
+  ringClasses?: string[];
 }
 
 /** Organic closed loop: a circle whose radius wobbles with low-frequency harmonics */
@@ -36,7 +38,9 @@ function organicLoop(cx0: number, cy0: number, r: number, seed: number) {
   return pts.join(" ") + "Z";
 }
 
-function Echo({ rings = 11 }: { rings?: number }) {
+type EchoProps = Pick<Props, "rings" | "ringClasses">;
+
+function Echo({ rings = 11, ringClasses }: EchoProps) {
   return (
     <g fill="none" strokeLinecap="round" strokeWidth="2.2">
       {Array.from({ length: rings }, (_, i) => (
@@ -44,6 +48,7 @@ function Echo({ rings = 11 }: { rings?: number }) {
           key={i}
           d={organicLoop(200 + i * 1.6, 200 - i * 1.2, 34 + i * 15, 0.9 + i * 0.22)}
           stroke="currentColor"
+          className={ringClasses?.[i % ringClasses.length]}
           opacity={1 - i * 0.055}
         />
       ))}
@@ -129,7 +134,7 @@ function Dabs() {
   );
 }
 
-const variants: Record<BrushVariant, (p: { rings?: number }) => React.JSX.Element> = {
+const variants: Record<BrushVariant, (p: EchoProps) => React.JSX.Element> = {
   echo: Echo,
   swirl: Swirl,
   scribble: Scribble,
@@ -137,7 +142,7 @@ const variants: Record<BrushVariant, (p: { rings?: number }) => React.JSX.Elemen
   dabs: Dabs,
 };
 
-export function Brushstroke({ variant, className, label, stretch, rings }: Props) {
+export function Brushstroke({ variant, className, label, stretch, rings, ringClasses }: Props) {
   const titleId = useId();
   const Art = variants[variant];
   return (
@@ -150,7 +155,7 @@ export function Brushstroke({ variant, className, label, stretch, rings }: Props
         : { "aria-hidden": true, focusable: false })}
     >
       {label && <title id={titleId}>{label}</title>}
-      <Art rings={rings} />
+      <Art rings={rings} ringClasses={ringClasses} />
     </svg>
   );
 }
